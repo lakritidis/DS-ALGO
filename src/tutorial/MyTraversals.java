@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class MyTraversals {
 	// In-order traversal (starting from node a)
-	public static void inorder(BTNode a){
+	public static void inorder(BTNode a) {
 		if (a == null) return;
 		inorder(a.getLeft());
 		System.out.print(((Item)a.getElement()).getKey() + " ");
