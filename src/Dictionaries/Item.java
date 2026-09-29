@@ -4,7 +4,7 @@ public class Item{
 	private Object key;
 	private Object info;
 	
-	protected Item(Object k, Object i) {
+	public Item(Object k, Object i) {
 		key = k;
 		info = i;
 	}

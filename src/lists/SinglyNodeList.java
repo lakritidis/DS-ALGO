@@ -156,7 +156,7 @@ public class SinglyNodeList {
 	public void showList() {
 		SNode temp = head;
 		
-		if (isEmpty()){
+		if (isEmpty()) {
 			System.out.println("List is empty. Nothing to show...");
 			return ;
 		}
