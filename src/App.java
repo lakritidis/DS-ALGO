@@ -56,7 +56,7 @@ public class App {
 			My[i].showList();
 		}
 	}
-
+/*
 	public static void checkDictionaryLinkedList() {
 		Comparator c;
 		SearchNodeList[] My = { new SearchNodeList(c), new SearchNodeList(c), new SearchNodeList(c) };
@@ -75,7 +75,7 @@ public class App {
 			System.out.println("Not Found ");
 		}
 	}
-
+*/
 	public static void test_binary_search() {
 /*
 		Object[] A = new Object[22];
@@ -102,7 +102,7 @@ public class App {
 		//checkSortingFunctions();
 
 		// Linked Lists
-		//checkLinkedLists();
-		checkDictionaryLinkedList();
+		checkLinkedLists();
+		//checkDictionaryLinkedList();
     }
 }

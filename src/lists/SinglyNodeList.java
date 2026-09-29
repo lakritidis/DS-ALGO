@@ -18,7 +18,7 @@ public class SinglyNodeList {
 
 	// Έλεγχος για το αν είναι άδεια η λίσττα
 	public boolean isEmpty() {		
-		return (nofElements < 1); 
+		return nofElements < 1; 
 	}
 
 	// Έλεγχος για το αν το δοθέν στοιχείο είναι η κεφαλή της λίστας
@@ -54,7 +54,7 @@ public class SinglyNodeList {
 
 		nofElements++;
 		SNode q = new SNode(p.getNext(), element);
-		if (p.getNext() == null) { // η ένθεση γίνεται στο τέλος
+		if (p.getNext() == null) { // η εισαγωγή γίνεται στο τέλος
 			tail = q;              // άρα ενημερώνεται η ουρά
 		}
 		p.setNext(q);
@@ -62,7 +62,7 @@ public class SinglyNodeList {
 	}
 
 	// Εισαγωγή νέου κόμβου με στοιχείο element στην αρχή της λίστας
-	public SNode insertFirst(Object element){ 
+	public SNode insertFirst(Object element) { 
 		nofElements++;
 		SNode q = new SNode(head, element);
 		head = q;
