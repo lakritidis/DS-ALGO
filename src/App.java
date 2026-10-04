@@ -1,7 +1,4 @@
-import java.util.Dictionary;
-
 import Dictionaries.DictionaryNodeList;
-import Dictionaries.SearchNodeList;
 import Dictionaries.Item;
 import lists.SNode;
 import lists.SinglyNodeList;
@@ -29,6 +26,9 @@ public class App {
 		System.out.println("Style : "+elGreco.getStyle());
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Sorting
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void checkSortingFunctions() {
 		Integer [] a = {56, 78, 23, 12, 7, -100, 85, 94, 77, 23, 19, 60, 100, 1, -1};
 		DSA_Array dsa = new DSA_Array(a);
@@ -38,6 +38,9 @@ public class App {
 		System.out.println("Key " + key + " was found at index " + dsa.BinarySearch(key));
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// LinkedList
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void checkLinkedLists() {
 		SinglyNodeList[] My = {new SinglyNodeList(), new SinglyNodeList(), new SinglyNodeList()};
 		int[][] A={{9, 3, 0, 10, 2, 5, 1, 4, 7, 6, 8},
@@ -62,8 +65,18 @@ public class App {
 		My[0].showList();
 	}
 
+	public static SinglyNodeList createLinkedList() {
+		SinglyNodeList myList = new SinglyNodeList();
+		SNode node1 = myList.insertFirst(20);
+		SNode node2 = myList.insertFirst(12);
+		SNode node3 = myList.insertFirst(50);
+		myList.insertAfter(node2, 100);
+		myList.insertLast( 200);
+		return myList;
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// DictionaryLinkedList
+	//// DictionaryLinkedList
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void checkDictionaryLinkedList() {
 		DictionaryNodeList My=new DictionaryNodeList();
@@ -176,7 +189,7 @@ public class App {
 		// κλήση της findInfo με κλειδί 45
 		itemKey=45;
 		temp = (Item)My.findInfo(itemKey);
-		if (temp == null){
+		if (temp == null) {
 			System.out.println("findInfo("+itemKey+") returned null");
 			System.out.println("There is no node with this Key");
 		} else {
@@ -188,7 +201,7 @@ public class App {
 		// κλήση της findNode με κλειδί 50
 		itemKey=50;
 		temp = (Item)My.findInfo(itemKey);
-		if (temp == null){
+		if (temp == null) {
 			System.out.println("findInfo("+itemKey+") returned null");
 			System.out.println("There is no node with this Key");
 		} else {
@@ -242,7 +255,6 @@ public class App {
 		My.showRecords();
 		System.out.println("---------------------\n");
 
-
 		// κλήση της deleteItem για απόσβεση της εγγραφής με κλειδί 20
 		itemKey=20;
 		if (My.deleteItem(itemKey)){
@@ -284,6 +296,8 @@ public class App {
 
 		// Linked Lists
 		//checkLinkedLists();
-		checkDictionaryLinkedList();
+		// checkDictionaryLinkedList();
+		SinglyNodeList lst = createLinkedList();
+		lst.display();
     }
 }

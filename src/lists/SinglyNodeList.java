@@ -234,11 +234,21 @@ public class SinglyNodeList {
 		
 		tail = head;
 		while (firstnotreversed != null) {
-			nextfirstnot=firstnotreversed.getNext();
+			nextfirstnot = firstnotreversed.getNext();
 			firstnotreversed.setNext(lastreversed);
-			lastreversed=firstnotreversed;
-			firstnotreversed=nextfirstnot;
+			lastreversed = firstnotreversed;
+			firstnotreversed = nextfirstnot;
 		}
 		head = lastreversed;
+	}
+
+	public void display() {
+		SNode p = head;
+		System.out.print("[");
+		while (p != null) {
+			System.out.print(p.getElement() + " ");
+			p = p.getNext();
+		}
+		System.out.print("]");
 	}
 }
