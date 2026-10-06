@@ -17,15 +17,26 @@ public class MergeSort {
         s.insertFirst(4);
         s.insertFirst(3);
         
+        s.display();
+        System.out.println();
+
         System.out.println("Added All the Elements");
+        System.out.println("Beginning MergeSort");
         
         SinglyNodeList sortedS = mergeSort(s);
+        sortedS.display();
         System.out.println();
-        // sortedS.display();
+        System.out.println("Finished MergeSort");
+
     }
 
     // Αναδρομική Υλοποίηση της Merge Sort πάνω στις μονά συνδεδεμένες λίστες (SinglyNodeList).
+    // Υποθέτω πως δεχόμαστε 
     static public SinglyNodeList mergeSort(SinglyNodeList s){
+        if (s.size() == 1){
+            return s;
+        }
+
         int nMiddle = s.size() / 2;
 
         // SNode nextFromMiddleNode = middleNode.getNext();
@@ -36,9 +47,8 @@ public class MergeSort {
             leftHalf.insertLast(leftHalfPtr);
             leftHalfPtr = leftHalfPtr.getNext();    
         }
-        System.out.println("Printing Left Half of the List");
-        leftHalf.display();
-        // leftHalf = mergeSort(leftHalf);
+        
+        leftHalf = mergeSort(leftHalf);
 
         SinglyNodeList rightHalf = new SinglyNodeList();
         SNode rightHalfPtr = leftHalfPtr;                
@@ -46,10 +56,8 @@ public class MergeSort {
             rightHalf.insertLast(rightHalfPtr);
             rightHalfPtr = rightHalfPtr.getNext();
         }
-        System.out.println("Printing Right Half of the List");
-        rightHalf.display();
         
-        // rightHalf = mergeSort(rightHalf);
+        rightHalf = mergeSort(rightHalf);
         
         
         return merge(leftHalf, rightHalf);
@@ -57,6 +65,36 @@ public class MergeSort {
 
     static public SinglyNodeList merge(SinglyNodeList a, SinglyNodeList b) {
         SinglyNodeList s = new SinglyNodeList();
+        SNode aPtr = a.first();
+        SNode bPtr = b.first();
+        
+        while (a.size() >= 1 && b.size() >= 1) {
+            // TODO: Να το υλοποιήσω με τον Comparator και Generics
+            int aValue = Integer.parseInt(aPtr.toString());
+            int bValue = Integer.parseInt(bPtr.toString());
+
+            
+            if ( bValue < aValue ){
+                s.insertLast(bPtr);
+                bPtr = bPtr.getNext();
+                b.removeFirst();                
+            } else {
+                s.insertLast(aPtr);
+                aPtr = aPtr.getNext();
+                a.removeFirst();                
+            }            
+            
+        }
+
+        for (int i = 0; i < a.size(); i++) {
+            s.insertLast(aPtr);
+            aPtr = aPtr.getNext();
+        }
+
+        for (int i = 0; i < b.size(); i++) {
+            s.insertLast(bPtr);
+            bPtr = bPtr.getNext();
+        }
 
         return s;
     }
