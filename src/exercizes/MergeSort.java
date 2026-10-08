@@ -1,11 +1,12 @@
 package exercizes;
+
 import lists.SinglyNodeList;
-import Dictionaries.Comparator;
 import lists.SNode;
 
-// Στατική Υλοποίηση του Αλγορίθμου Ταξινόμησης
+
+// Υλοποίηση του Αλγορίθμου Ταξινόμησης
 public class MergeSort {
-    static public void main(String argv[]){
+    public static void main(String argv[]){
         System.out.println("Running MergeSort with Single linked list.");
         SinglyNodeList s = new SinglyNodeList();
 
@@ -22,24 +23,24 @@ public class MergeSort {
 
         System.out.println("Added All the Elements");
         System.out.println("Beginning MergeSort");
-        
-        SinglyNodeList sortedS = mergeSort(s);
+        MergeSort sorter = new MergeSort();
+
+        SinglyNodeList sortedS = sorter.mergeSort(s);
         sortedS.display();
         System.out.println();
         System.out.println("Finished MergeSort");
-
     }
 
-    // Αναδρομική Υλοποίηση της Merge Sort πάνω στις μονά συνδεδεμένες λίστες (SinglyNodeList).
-    // Υποθέτω πως δεχόμαστε 
-    static public SinglyNodeList mergeSort(SinglyNodeList s){
+    // Αναδρομική Υλοποίηση της Merge Sort πάνω στις μονά συνδεδεμένες λίστες 
+    // με ακέραιους αριθμούς (SinglyNodeList).
+    public SinglyNodeList mergeSort(SinglyNodeList s){
+        // Το χειρόφρενο της αναδρομής
         if (s.size() == 1){
             return s;
         }
 
+        // Χωρίζουμε την λίστα σε δύο κομμάτια.
         int nMiddle = s.size() / 2;
-
-        // SNode nextFromMiddleNode = middleNode.getNext();
 
         SinglyNodeList leftHalf = new SinglyNodeList();
         SNode leftHalfPtr = s.first();
@@ -59,21 +60,22 @@ public class MergeSort {
         
         rightHalf = mergeSort(rightHalf);
         
-        
+        // Στο τέλος επιστρέφουμε την συγχωνευμένει λίστα.
         return merge(leftHalf, rightHalf);
     }
 
-    static public SinglyNodeList merge(SinglyNodeList a, SinglyNodeList b) {
+    // Συγνώνευση των υπολιστών σε νέες λίστες
+    public SinglyNodeList merge(SinglyNodeList a, SinglyNodeList b) {
         SinglyNodeList s = new SinglyNodeList();
         SNode aPtr = a.first();
         SNode bPtr = b.first();
         
+        // 
         while (a.size() >= 1 && b.size() >= 1) {
-            // TODO: Να το υλοποιήσω με τον Comparator και Generics
             int aValue = Integer.parseInt(aPtr.toString());
             int bValue = Integer.parseInt(bPtr.toString());
 
-            
+            // Προσθέτουμε το μικρότερο αριθμό κάθε φορά. 
             if ( bValue < aValue ){
                 s.insertLast(bPtr);
                 bPtr = bPtr.getNext();
@@ -83,9 +85,9 @@ public class MergeSort {
                 aPtr = aPtr.getNext();
                 a.removeFirst();                
             }            
-            
         }
 
+        // Άδειασμα της μια από της δυο λίστες.
         for (int i = 0; i < a.size(); i++) {
             s.insertLast(aPtr);
             aPtr = aPtr.getNext();
@@ -98,5 +100,4 @@ public class MergeSort {
 
         return s;
     }
-
 }
