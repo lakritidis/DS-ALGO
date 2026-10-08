@@ -13,6 +13,7 @@ public class MergeSort {
         s.insertFirst(5);
         s.insertFirst(2);
         s.insertFirst(1);
+        s.insertFirst(5);
         s.insertFirst(6);
         s.insertFirst(9);
         s.insertFirst(4);
@@ -35,7 +36,7 @@ public class MergeSort {
     // με ακέραιους αριθμούς (SinglyNodeList).
     public SinglyNodeList mergeSort(SinglyNodeList s){
         // Το χειρόφρενο της αναδρομής
-        if (s.size() == 1){
+        if (s.size() <= 1){
             return s;
         }
 
