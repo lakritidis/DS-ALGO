@@ -1,6 +1,6 @@
 package Dictionaries;
 
-public class Item{
+public class Item {
 	private Object key;
 	private Object info;
 	
