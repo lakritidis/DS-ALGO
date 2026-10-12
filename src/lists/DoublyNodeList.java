@@ -2,7 +2,7 @@ package lists;
 
 public class DoublyNodeList {
 	protected int nofElements;		// πλήθος των αποθηκευμένων στοιχείων-κόμβων
-	protected DNode head, tail;		// δείκτες προς κεφαλή και ουρά
+	protected DNode head, tail; 	// δείκτες προς κεφαλή και ουρά
 
 	// Constructor; χρόνος Ο(1)
 	public DoublyNodeList() {
@@ -166,4 +166,17 @@ public class DoublyNodeList {
 		return last.getElement();
 	}
 
+
+	public void display(){
+		DNode p = head;
+		System.out.print("[");
+		while (p != null) {
+			System.out.print(p.getElement());
+			if (p.getNext() != null) {
+				System.out.print(" <-> ");
+			}
+			p = p.getNext();
+		}
+		System.out.print("]");
+	}
 }
