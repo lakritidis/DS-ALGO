@@ -1,5 +1,6 @@
 package Dictionaries;
 
+import items.Item;
 
 // Η κλάση των στοιχείων που αποθηκεύει ένας κόμβος ενός δένδρου ΑVL
 public class AvlItem extends Item {

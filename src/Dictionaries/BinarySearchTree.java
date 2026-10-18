@@ -2,17 +2,19 @@ package Dictionaries;
 
 import trees.LinkedBinaryTree;
 import trees.BTNode;
+import items.Item;
+import comparator.Comparator;
 
 // Η κλάση BinarySearchTree αποτελεί επέκταση της LinkedBinaryTree (δυναμικά δυαδικά δένδρα)
 public class BinarySearchTree extends LinkedBinaryTree {
 	Comparator c;
 
-	BinarySearchTree(Comparator com) {
+	public BinarySearchTree(Comparator com) {
 		super(); // καλεί τον constructor της κλάσης LinkedBinaryTree
 		c = com;
 	}
 
-	BinarySearchTree(Item item, Comparator com) {
+	public BinarySearchTree(Item item, Comparator com) {
 		super(item); // καλεί τον constructor της κλάσης LinkedBinaryTree
 		c = com;
 	}
