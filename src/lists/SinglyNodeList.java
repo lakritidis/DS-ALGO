@@ -246,7 +246,10 @@ public class SinglyNodeList {
 		SNode p = head;
 		System.out.print("[");
 		while (p != null) {
-			System.out.print(p.getElement() + " ");
+			System.out.print(p.getElement());
+			if (p.getNext() != null) {
+				System.out.print(" -> ");
+			}
 			p = p.getNext();
 		}
 		System.out.print("]");

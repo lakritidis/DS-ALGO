@@ -42,4 +42,9 @@ public class DNode {
 	public void setNext(DNode newNext) {
 		next = newNext;
 	}
+
+	@Override 
+	public String toString(){
+		return element.toString();
+	}
 }

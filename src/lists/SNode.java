@@ -17,6 +17,11 @@ public class SNode {
 		return element;
 	}
 
+	@Override 
+	public String toString() {
+		return element.toString();
+	}
+
 	// Επιστρέφει τον δείκτη προς επόμενο στοιχείο
 	public SNode getNext() {
 		return next;
