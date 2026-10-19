@@ -1,5 +1,7 @@
 package trees;
 
+import items.Item;
+
 // Binary tree
 public class LinkedBinaryTree {
 	private BTNode Root;					// Pointer to the tree's root
@@ -178,4 +180,41 @@ public class LinkedBinaryTree {
 		v.setElement(w.getElement());
 		w.setElement(temp);
 	}
+
+	public void InOrder() {
+		inorder(Root);
+	}
+
+	public void PreOrder() {
+		preorder(Root);
+	}
+
+	public void PostOrder() {
+		postorder(Root);
+	}
+
+	// In-order traversal (starting from node a)
+	static void inorder(BTNode a) {
+		if (a == null) return;
+		inorder(a.getLeft());
+		System.out.print(((Item)a.getElement()).getKey() + " ");
+		inorder(a.getRight());
+	}
+
+	// Pre-order traversal (starting from node a)
+	public static void preorder(BTNode a) {
+		if (a == null) return;
+		System.out.print(((Item)a.getElement()).getKey() + " ");
+		preorder(a.getLeft());
+		preorder(a.getRight());
+	}
+
+	// Post-order traversal (starting from node a)
+	public static void postorder(BTNode a) {
+		if (a == null) return;	
+		postorder(a.getLeft());
+		postorder(a.getRight());
+		System.out.print(((Item)a.getElement()).getKey() + " ");
+	}
+
 }

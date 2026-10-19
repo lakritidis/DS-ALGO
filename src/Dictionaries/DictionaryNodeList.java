@@ -2,6 +2,7 @@ package Dictionaries;
 
 import lists.SNode;
 import lists.SinglyNodeList;
+import items.Item;
 
 public class DictionaryNodeList extends SinglyNodeList {
 

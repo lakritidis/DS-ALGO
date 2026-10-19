@@ -1,4 +1,4 @@
-package Dictionaries;
+package items;
 
 public class Item {
 	private Object key;

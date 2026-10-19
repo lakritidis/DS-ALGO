@@ -1,17 +1,21 @@
 package Dictionaries;
 
 import trees.BTNode;
+import items.Item;
+import comparator.Comparator;
 
 public class AvlTree extends BinarySearchTree {
-
-	AvlTree(Comparator com){
+	// Constructor #1
+	AvlTree(Comparator com) {
 		super(com);
 	}
 
+	// Constructor #2
 	AvlTree(AvlItem item, Comparator com) {
 		super(item, com);
 	}
 
+	// Επιστρέφει το ύψος του δεξιού γιου
 	private int getRightSonHeight(BTNode v) {
 		if (v == null) {
 			System.out.println("Null node has no right son!");
@@ -26,6 +30,7 @@ public class AvlTree extends BinarySearchTree {
 		// return (v.getRight() != null ? ((AvlItem)v.getRight().getElement()).getHeight() : 0);
 	}
 
+	// Επιστρέφει το ύψος του αριστερού γιου 
 	private int getLeftSonHeight(BTNode v){
 		if (v == null) {
 			System.out.println("Null node has no left son!");
@@ -38,7 +43,34 @@ public class AvlTree extends BinarySearchTree {
 			return ((AvlItem)v.getLeft().getElement()).getHeight();
 		}
 		// return (v.getLeft()!=null?((avlItem) v.getLeft().getElement()).getHeight():0);
-	}		
+	}
+
+	 // Επιστρέφει την πληροφορία του item με κλειδί key εάν υπάρχει τέτοιο
+	public Object findInfo(Object key) {
+		return super.findInfo(key, root());
+	}
+
+	 // Ένθεση του i χρησιμοποιώντας των ομώνυμη κληρονομημένη μέθοδο από τα δυαδικά
+	 // δένδρα αναζητήσεως
+	public BTNode insertItem(Item i) {
+		BTNode insNode = super.insertItem(i);  // Χρήση της ομώνυμης μεθόδου
+		if (insNode == null) {			       // Δεν έγινε ένθεση γιατί υπάρχει ήδη
+			return null;
+		}
+		rebalance(insNode);                    // Επαναζύγιση ξεκινώντας από το νέο κόμβο
+		return insNode;                        // τον οποίο επιστρέφει
+	}
+
+	 // Διαγραφή του στοιχείου με κλειδί key χρησιμοποιώντας των ομώνυμη κληρονομημένη
+	 // μέθοδο από τα δυαδικά δένδρα αναζητήσεως
+	public BTNode deleteItem(Object key) {
+		BTNode delNode = super.deleteItem(key);	 // Χρήση της ομώνυμης μεθόδου
+		if (delNode == null) {                   // Δεν έγινε διαγραφή γιατί δεν υπάρχει
+			return null;
+		}
+		rebalance(delNode);                      // Επαναζύγιση ξεκινώντας από τον κόμβο που απώλεσε γιο
+		return delNode;                          // και επιστροφή του
+	}
 
 	// called only if p is internal
 	private void remedyHeight(BTNode v) {
@@ -107,7 +139,6 @@ public class AvlTree extends BinarySearchTree {
 			v = v.getParent(); 
 		}
 	}
-
 
 	private BTNode reconstruct(BTNode v, BTNode w, BTNode u) {
 		// Right Rotation
@@ -210,18 +241,5 @@ public class AvlTree extends BinarySearchTree {
 			}
 			return u;
 		}
-	}
-
-	/*
-	// methods of the dictionary ADT
-
-	/** Overrides the corresponding method of the parent class. */
-	public BTNode insertItem(Item i) {
-		BTNode insNode=super.insertItem(i); // may throw an InvalidKeyException
-
-		//   System.out.println("RBLNC:"+((avlItem)insNode.getElement()).getKey());
-		if (insNode==null) return null;
-		rebalance(insNode);
-		return insNode;
 	}
 }

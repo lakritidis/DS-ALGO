@@ -1,9 +1,11 @@
+import Dictionaries.BinarySearchTree;
 import Dictionaries.DictionaryNodeList;
-import Dictionaries.Item;
+import comparator.Comparator;
 import lists.SNode;
 import lists.SinglyNodeList;
 import tutorial.Artist;
 import tutorial.Painter;
+import items.Item;
 
 public class App {
 	public static void JavaTutorial() {
@@ -287,6 +289,18 @@ public class App {
 */
 	}
 
+	public static BinarySearchTree create_binary_tree() {
+		BinarySearchTree bst = new BinarySearchTree(new Comparator());
+		bst.insertItem(new Item(10, "payload for key 10"));
+		bst.insertItem(new Item(5, "payload for key 5"));
+		bst.insertItem(new Item(1, "payload for key 1"));
+		bst.insertItem(new Item(18, "payload for key 18"));
+		bst.insertItem(new Item(15, "payload for key 15"));
+		bst.insertItem(new Item(7, "payload for key 7"));
+		bst.insertItem(new Item(9, "payload for key 9"));
+		return bst;
+	}
+
     public static void main(String[] args) throws Exception {
 		// java Tutorial
 		// JavaTutorial();
@@ -297,7 +311,20 @@ public class App {
 		// Linked Lists
 		//checkLinkedLists();
 		// checkDictionaryLinkedList();
-		SinglyNodeList lst = createLinkedList();
-		lst.display();
+		//SinglyNodeList lst = createLinkedList();
+		//lst.display();
+		BinarySearchTree tree = create_binary_tree();
+
+		System.out.println();
+		System.out.print("Pre-Order Traversal: ");
+		tree.PreOrder();
+
+		System.out.println();
+		System.out.print("Post-Order Traversal: ");
+		tree.PostOrder();
+
+		System.out.println();
+		System.out.print("In-Order Traversal: ");
+		tree.InOrder();
     }
 }

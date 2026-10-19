@@ -1,6 +1,7 @@
 package tutorial;
 
 import trees.*;
+import items.Item;
 import lists.SinglyNodeList;
 import java.util.Vector;
 
