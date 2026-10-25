@@ -19,7 +19,7 @@ public class AvlTree extends BinarySearchTree {
 	// Επιστρέφει το ύψος του δεξιού γιου
 	private int getRightSonHeight(BTNode v) {
 		if (v == null) {
-			System.out.println("Null node has no right son!");
+			System.out.println("Κενός κόμβος, δεν υπάρχει δεξί παιδί");
 			return -1;
 		}
 
@@ -32,9 +32,9 @@ public class AvlTree extends BinarySearchTree {
 	}
 
 	// Επιστρέφει το ύψος του αριστερού γιου 
-	private int getLeftSonHeight(BTNode v){
+	private int getLeftSonHeight(BTNode v) {
 		if (v == null) {
-			System.out.println("Null node has no left son!");
+			System.out.println("Κενός κόμβος, δεν υπάρχει αριστερό παιδί");
 			return -1;
 		}
 
@@ -51,26 +51,26 @@ public class AvlTree extends BinarySearchTree {
 		return super.findInfo(key, root());
 	}
 
-	 // Ένθεση του i χρησιμοποιώντας των ομώνυμη κληρονομημένη μέθοδο από τα δυαδικά
-	 // δένδρα αναζητήσεως
+	 // Εισαγωγή στοιχείου i.
+	 // Χρησιμοποιεί την ομώνυμη κληρονομημένη μέθοδο από τα δυαδικά δέντρα αναζήτησης
 	public BTNode insertItem(Item i) {
-		BTNode insNode = super.insertItem(i);  // Χρήση της ομώνυμης μεθόδου
-		if (insNode == null) {			       // Δεν έγινε ένθεση γιατί υπάρχει ήδη
+		BTNode insNode = super.insertItem(i);	// Χρήση της ομώνυμης μεθόδου
+		if (insNode == null) {					// Δεν έγινε εισαγωγή γιατί υπάρχει ήδη
 			return null;
 		}
-		rebalance(insNode);                    // Επαναζύγιση ξεκινώντας από το νέο κόμβο
-		return insNode;                        // τον οποίο επιστρέφει
+		rebalance(insNode);						// Επαναζύγιση ξεκινώντας από το νέο κόμβο
+		return insNode;							// τον οποίο επιστρέφει
 	}
 
-	 // Διαγραφή του στοιχείου με κλειδί key χρησιμοποιώντας των ομώνυμη κληρονομημένη
-	 // μέθοδο από τα δυαδικά δένδρα αναζητήσεως
+	// Διαγραφή του στοιχείου με κλειδί key.
+	// Χρησιμοποιεί την ομώνυμη κληρονομημένη μέθοδο από τα δυαδικά δέντρα αναζήτησης
 	public BTNode deleteItem(Object key) {
-		BTNode delNode = super.deleteItem(key);	 // Χρήση της ομώνυμης μεθόδου
-		if (delNode == null) {                   // Δεν έγινε διαγραφή γιατί δεν υπάρχει
+		BTNode delNode = super.deleteItem(key);	// Χρήση της ομώνυμης μεθόδου
+		if (delNode == null) {					// Δεν έγινε διαγραφή γιατί δεν υπάρχει
 			return null;
 		}
-		rebalance(delNode);                      // Επαναζύγιση ξεκινώντας από τον κόμβο που απώλεσε γιο
-		return delNode;                          // και επιστροφή του
+		rebalance(delNode);						// Επαναζύγιση ξεκινώντας από τον κόμβο που απώλεσε γιο
+		return delNode;							// και επιστροφή του.
 	}
 
 	// called only if p is internal
@@ -83,13 +83,13 @@ public class AvlTree extends BinarySearchTree {
 		AvlItem vItem = (AvlItem)v.getElement();
 
 		vItem.setHeight(1 + Math.max(getRightSonHeight(v), getLeftSonHeight(v)));
-		//  System.out.println("HHH:"+vItem.getHeight());
+		// System.out.println("HHH:"+vItem.getHeight());
 	}
 
 	// test whether node p has balance factor between -1 and 1
 	private boolean isBalanced(BTNode v)  {
 		if (v == null) {
-			System.out.println("Null node has no balance!");
+			System.out.println("Κενός κόμβος, δεν επιτρέπεται ο έλεγχος");
 			return false;
 		}
 
@@ -100,7 +100,7 @@ public class AvlTree extends BinarySearchTree {
 	// return a child of p with height no smaller than that of the other child
 	private BTNode heigherSon(BTNode v)  {
 		if (v == null) {
-			System.out.println("Null node has no sons at all!");
+			System.out.println("Κενός κόμβος, δεν υπάρχουν παιδιά");
 			return null;
 		}
 
@@ -110,29 +110,144 @@ public class AvlTree extends BinarySearchTree {
 			return v.getRight();
 		}
 	}
-/*
-	private void rebalance_s(BTNode v) {	
+
+	// Επαναζυγίζει το δένδρο, από κάτω προς τα πάνω ξεκινώντας από τον κόμβο v.
+	private void rebalance(BTNode v) {	
 		if (v == null) {
 			System.out.println("Αδύνατη η επαναζύγιση κενού κόμβου");
 			return;
 		}
 		BTNode u, w;
-		while (v != null) {				// όσο δεν ξεπεράσαμε την ρίζα
-			remedyHeight(v);			// διορθώνουμε το ύψος του v
-			if (!isBalanced(v)) {		      
-				w = rebalanceSon(v);	     	//  ο γιος
-				u = rebalanceSon(w);	      	// ο εγγονός που θα συμμετάσχουν στην
+		while (v != null) {					// όσο δεν ξεπεράσαμε την ρίζα
+			remedyHeight(v);				// διορθώνουμε το ύψος του v
+			if (!isBalanced(v)) {
+				w = heigherSon(v);			// ο γιος
+				u = heigherSon(w);			// ο εγγονός που θα συμμετάσχουν στην
 				v = reconstruct(v, w, u);	// δομική αλλαγή
 				remedyHeight(v.getLeft());	// διόρθωση υψών των
 				remedyHeight(v.getRight());	// εμπλεκόμενων κόμβων
 				remedyHeight(v);
 			}
-			v = v.getParent();			// ανεβαίνουμε στον πατέρα
+			v = v.getParent();				// ανεβαίνουμε στον πατέρα
 		}
 	}
-*/
-	// επαναζυγίζει το δένδρο, από κάτω προς τα πάνω ξεκινώντας από τον κόμβο v
-	private void rebalance(BTNode v) {
+
+	// Αναδομεί τοπικά το δένδρο κάνοντας απλή ή διπλή περιστροφή. 
+	private BTNode reconstruct(BTNode v, BTNode w, BTNode u) {
+		if (isLeft(w) && isLeft(u)) {
+			return rotateRight(v, w, u);		// Απλή δεξιά περιστροφή
+		} else if (isRight(w) && isRight(u)) {
+			return rotateLeft(v, w, u);			// Απλή αριστερή περιστροφή
+		} else if (isLeft(u)) {
+			return rotateDoubleLeft(v, w, u);	// Διπλή αριστερή περιστροφή
+		} else {
+			return rotateDoubleRight(v, w, u);	// Διπλή δεξιά περιστροφή
+		}
+	}
+
+	// Απλή αριστερή περιστροφή (rot)
+	private BTNode rotateLeft(BTNode v, BTNode w, BTNode u) {
+		if (!isRoot(v)) {				// Εάν ο v δεν είναι η ρίζα, έχει πατέρα.
+			// Αντιμετάθεση του v με w
+			if (isRight(v)) {
+				v.getParent().setRight(w);
+			} else {
+				v.getParent().setLeft(w);
+			}
+			w.setParent(v.getParent());
+		}
+		v.setRight(w.getLeft());		// Νέος δεξιός γιος του v γίνεται ο αριστερός του w
+		if (w.getLeft() != null) {
+			w.getLeft().setParent(v);	// Ο αριστερός γιος του w απoκτά ως πατέρα τον v
+		}
+		w.setLeft(v); 			 		// Νέος αριστερός γιος του w γίνεται ο v
+		v.setParent(w);					// Νέος πατέρας του v γίνεται ο w
+		if (isRoot(v)) {
+			setRoot(w);
+			w.setParent(null);
+		}
+		return w;
+	}
+
+	// Απλή δεξιά περιστροφή (Rot)
+	private BTNode rotateRight(BTNode v, BTNode w, BTNode u) {
+	    if (!isRoot(v)) {				// Εάν ο v δεν είναι η ρίζα, έχει πατέρα.
+			// Αντιμετάθεση του v με w
+		    if (isLeft(v)) {
+				v.getParent().setLeft(w);
+			} else {
+				v.getParent().setRight(w);
+			}
+			w.setParent(v.getParent());
+	    }
+	    v.setLeft(w.getRight());		// Νέος αριστερός γιος του v γίνεται ο δεξιός του w
+	    if (w.getRight() != null) {
+			w.getRight().setParent(v);	// Ο δεξιός γιος του w απoκτά ως πατέρα τον v
+		}
+	    w.setRight(v);					// Νέος δεξιός γιος του w γίνεται ο v
+	    v.setParent(w);					// Νέος πατέρας του v γίνεται ο w
+	    if (isRoot(v)) {
+			setRoot(w);
+			w.setParent(null);
+		}
+	    return w;
+	}
+
+	// Διπλή αριστερή περιστροφή (Drot)
+	private BTNode rotateDoubleLeft(BTNode v, BTNode w, BTNode u) {
+		v.setRight(u.getLeft());		// Νέος δεξιός γιος του v γίνεται ο αριστερός του u
+		if (u.getLeft() != null) {
+			u.getLeft().setParent(v);	// Ο v γίνεται πατέρας του αριστερού γιου του u
+		}
+		w.setLeft(u.getRight());		// Νέος αριστερός γιος του w γίνεται ο δεξιός του u
+		if (u.getRight() != null) {
+			u.getRight().setParent(w);	// Ο w γίνεται πατέρας του δεξιού γιου του u
+		}
+		if (!isRoot(v)) {
+			if (isRight(v)) {
+				v.getParent().setRight(u);	// Ο πατέρας του v αποκτά δεξιό γιο τον u (αv v δεξιός)
+			} else {
+				v.getParent().setLeft(u);	// Ο πατέρας του v αποκτά αριστερό γιο τον u (αν v  αριστερός)
+			}
+			u.setParent(v.getParent());		// Πατέρας του u γίνεται ο πρώην πατέρας του v
+		}
+		v.setParent(u); w.setParent(u); u.setLeft(v); u.setRight(w); // Νέες αναθέσεις
+		if (isRoot(v)) {
+			setRoot(u);
+			u.setParent(null);
+		}
+		return u;
+	}
+
+	// Διπλή δεξιά περιστροφή (DRot)
+	private BTNode rotateDoubleRight(BTNode v, BTNode w, BTNode u) {
+		v.setLeft(u.getRight());			// Νέος αριστερός γιος του v γίνεται ο δεξιός του u
+		if (u.getRight() != null) {
+			u.getRight().setParent(v);		// Ο v γίνεται πατέρας του δεξιού γιου του u
+		}
+		w.setRight(u.getLeft());			// Νέος δεξιός γιος του w γίνεται ο αριστερός του u
+		if (u.getLeft() != null) {
+			u.getLeft().setParent(w);		// Ο w γίνεται πατέρας του αριστερού γιου του u
+		}
+
+		if (!isRoot(v)) {
+			if (isLeft(v)) {
+				v.getParent().setLeft(u);	// Ο πατέρας του v αποκτά αριστερό γιο τον u
+			} else {
+				v.getParent().setRight(u);	// Ο πατέρας του v αποκτά δεξιό γιο τον u
+			}
+			u.setParent(v.getParent());		// Πατέρας του u γίνεται ο πρώην πατέρας του v
+		}
+		v.setParent(u); w.setParent(u); u.setRight(v); u.setLeft(w); // Νέες αναθέσεις
+		if (isRoot(v)) {
+			setRoot(u);
+			u.setParent(null);
+		}
+		return u;
+	}
+
+	// Επαναζυγίζει το δένδρο, από κάτω προς τα πάνω ξεκινώντας από τον κόμβο v
+	private void rebalance_2(BTNode v) {
 		if (v == null) {
 			System.out.println("Αδύνατη η επαναζύγιση κενού κόμβου");
 			return ;
@@ -159,15 +274,7 @@ public class AvlTree extends BinarySearchTree {
 		}
 	}
 
-		// Αναδομεί τοπικά το δένδρο κάνοντας απλή ή διπλή περιστροφή. 
-	private BTNode reconstruct_slides(BTNode v, BTNode w, BTNode u) {
-		if (isLeft(w) && isLeft(u)) return rotateRight(v, w, u);	// Απλή δεξιά περιστροφή
-		else if (isRight(w) && isRight(u)) return rotateLeft(v, w, u);	 // Απλή αριστερή περιστροφή
-		else if (isLeft(u)) return rotateDoubleLeft(v, w, u);	 	// Διπλή αριστερή περιστροφή
-		else return rotateDoubleRight(v, w, u);			 // Διπλή δεξιά περιστροφή
-	}
-
-	private BTNode reconstruct(BTNode v, BTNode w, BTNode u) {
+	private BTNode reconstruct_2(BTNode v, BTNode w, BTNode u) {
 		// Right Rotation
 		if (isLeft(w) && isLeft(u)) {
 			if (!isRoot(v)) {
@@ -268,102 +375,5 @@ public class AvlTree extends BinarySearchTree {
 			}
 			return u;
 		}
-	}
-
-	private BTNode rotateLeft(BTNode v, BTNode w, BTNode u) {		// Απλή αριστερή περιστροφή (rot)
-		if (!isRoot(v)) {					// Εάν ο v ; έχει πατέρα
-			// Αντιμετάθεση του v με w
-			if (isRight(v)) {
-				v.getParent().setRight(w);
-			} else {
-				v.getParent().setLeft(w);
-			}
-			w.setParent(v.getParent());
-		}
-		v.setRight(w.getLeft());		                       // Νέος δεξιός γιος του v γίνεται ο αριστερός του w
-		if (w.getLeft() != null) {
-			w.getLeft().setParent(v); // Ο αριστερός γιος του w απoκτά ως πατέρα τον v
-		}
-		w.setLeft(v); 			 	  // Νέος αριστερός γιος του w γίνεται ο v
-		v.setParent(w);			 	  // Νέος πατέρας του v γίνεται ο w
-		if (isRoot(v)) {
-			setRoot(w);
-			w.setParent(null);
-		}
-		return w;
-	}
-
-	private BTNode rotateRight(BTNode v, BTNode w, BTNode u) { // Απλή δεξιά περιστροφή (Rot)
-	    if (!isRoot(v)) {				       // Εάν ο v ;έχει πατέρα
-			// Αντιμετάθεση του v με w
-		    if (isLeft(v)) {
-				v.getParent().setLeft(w);
-			} else {
-				v.getParent().setRight(w);
-			}
-			w.setParent(v.getParent());
-	    }
-	    v.setLeft(w.getRight());	               // Νέος αριστερός γιος του v γίνεται ο δεξιός του w
-	    if (w.getRight() != null) {
-			w.getRight().setParent(v); // Ο δεξιός γιος του w απoκτά ως πατέρα τον v
-		}
-	    w.setRight(v); 			 // Νέος δεξιός γιος του w γίνεται ο v
-	    v.setParent(w);			 // Νέος πατέρας του v γίνεται ο w
-	    if (isRoot(v)) {
-			setRoot(w);
-			w.setParent(null);
-		}
-	    return w;
-	}
-
-	private BTNode rotateDoubleLeft(BTNode v, BTNode w, BTNode u) { // Διπλή αριστ.περιστροφή (Drot)
-		v.setRight(u.getLeft());			    // Νέος δεξιός γιος του v γίνεται ο αριστερός του u
-		if (u.getLeft() != null) {
-			u.getLeft().setParent(v);    // Ο v γίνεται πατέρας του αριστερού γιου του u
-		}
-		w.setLeft(u.getRight());			    // Νέος αριστερός γιος του w γίνεται ο δεξιός του u
-		if (u.getRight() != null) {
-			u.getRight().setParent(w);  // Ο w γίνεται πατέρας του δεξιού γιου του u
-		}
-		if (!isRoot(v)) {
-			if (isRight(v)) {
-				v.getParent().setRight(u); // Ο πατέρας του v αποκτά δεξιό γιο τον u   (av  v δεξιός)
-			} else {
-				v.getParent().setLeft(u);  // Ο πατέρας του v αποκτά αριστερό γιο τον u (αν v  αριστερός)
-			}
-			u.setParent(v.getParent());		         // Πατέρας του u γίνεται ο πρώην πατέρας του v
-		}
-		v.setParent(u); w.setParent(u); u.setLeft(v); u.setRight(w); // Νέες αναθέσεις
-		if (isRoot(v)) {
-			setRoot(u);
-			u.setParent(null);
-		}
-		return u;
-	}
-
-	private BTNode rotateDoubleRight(BTNode v, BTNode w, BTNode u) {     // Διπλή δεξιά περιστροφή (DRot)
-		v.setLeft(u.getRight());			        // Νέος αριστερός γιος του v γίνεται ο δεξιός του u
-		if (u.getRight() != null) {
-			u.getRight().setParent(v); // Ο v γίνεται πατέρας του δεξιού γιου του u
-		}
-		w.setRight(u.getLeft());			        // Νέος δεξιός γιος του w γίνεται ο αριστερός του u
-		if (u.getLeft() != null) {
-			u.getLeft().setParent(w);        // Ο w γίνεται πατέρας του αριστερού γιου του u
-		}
-
-		if (!isRoot(v)) {
-			if (isLeft(v)) {
-				v.getParent().setLeft(u); 	 // Ο πατέρας του v αποκτά αριστερό γιο τον u
-			} else {
-				v.getParent().setRight(u);	   	 // Ο πατέρας του v αποκτά δεξιό γιο τον u
-			}
-			u.setParent(v.getParent());		 	  // Πατέρας του u γίνεται ο πρώην πατέρας του v
-		}
-		v.setParent(u); w.setParent(u); u.setRight(v); u.setLeft(w); // Νέες αναθέσεις
-		if (isRoot(v)) {
-			setRoot(u);
-			u.setParent(null);
-		}
-		return u;
 	}
 }
