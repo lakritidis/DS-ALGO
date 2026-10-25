@@ -1,11 +1,13 @@
-import Dictionaries.BinarySearchTree;
 import Dictionaries.DictionaryNodeList;
+import Dictionaries.BinarySearchTree;
+import Dictionaries.AvlTree;
+
 import comparator.Comparator;
 import lists.SNode;
 import lists.SinglyNodeList;
 import tutorial.Artist;
 import tutorial.Painter;
-import items.Item;
+import items.*;
 
 public class App {
 	public static void JavaTutorial() {
@@ -301,6 +303,21 @@ public class App {
 		return bst;
 	}
 
+	public static AvlTree create_avl_tree() {
+		AvlTree avl = new AvlTree(new Comparator());
+		avl.insertItem(new AvlItem(10, "payload for key 10"));
+		avl.insertItem(new AvlItem(5, "payload for key 5"));
+		avl.insertItem(new AvlItem(1, "payload for key 1"));
+		avl.insertItem(new AvlItem(18, "payload for key 18"));
+		avl.insertItem(new AvlItem(15, "payload for key 15"));
+		avl.insertItem(new AvlItem(7, "payload for key 7"));
+		avl.insertItem(new AvlItem(9, "payload for key 9"));
+		avl.insertItem(new AvlItem(2, "payload for key 9"));
+		avl.insertItem(new AvlItem(3, "payload for key 9"));
+		avl.insertItem(new AvlItem(4, "payload for key 9"));
+		return avl;
+	}
+
     public static void main(String[] args) throws Exception {
 		// java Tutorial
 		// JavaTutorial();
@@ -313,7 +330,8 @@ public class App {
 		// checkDictionaryLinkedList();
 		//SinglyNodeList lst = createLinkedList();
 		//lst.display();
-		BinarySearchTree tree = create_binary_tree();
+		// BinarySearchTree tree = create_binary_tree();
+		AvlTree tree = create_avl_tree();
 
 		System.out.println();
 		System.out.print("Pre-Order Traversal: ");

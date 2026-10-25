@@ -132,5 +132,4 @@ public class MyTraversals {
 		if (w.getRight()!=null) MyFiFo.insertLast(w.getRight());
 	}
 	}
-
 	}
