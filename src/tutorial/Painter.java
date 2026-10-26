@@ -23,4 +23,8 @@ public class Painter extends Artist { /* Painter παιδί της Artist */
 	public String getStyle(){
 		return style;
 	}
+
+	public int getNumberOfPaints() {
+		return numberOfPaints;
+	}
 }

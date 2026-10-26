@@ -246,34 +246,7 @@ public class AvlTree extends BinarySearchTree {
 		return u;
 	}
 
-	// Επαναζυγίζει το δένδρο, από κάτω προς τα πάνω ξεκινώντας από τον κόμβο v
-	private void rebalance_2(BTNode v) {
-		if (v == null) {
-			System.out.println("Αδύνατη η επαναζύγιση κενού κόμβου");
-			return ;
-		}
-		BTNode u, w;
-
-		while (v != null) {         // όσο δεν ξεπεράσαμε την ρίζα
-			remedyHeight(v);        // διορθώνουμε το ύψος του v
-			if (!isBalanced(v)) { 
-				// System.out.println("Root:"+((avlItem)root().getElement()).getKey());
-				// System.out.println("Balance because L"+getLeftSonHeight(v)+"R"+getRightSonHeight(v));
-			
-				w = heigherSon(v);  // ο γιος
-				u = heigherSon(w);  // ο εγγονός που θα συμμετάσχουν στην
-				// System.out.println("w:"+((avlItem)w.getElement()).getKey()+","+((avlItem)w.getElement()).getHeight()
-				// +"u"+((avlItem)u.getElement()).getKey()+","+((avlItem)u.getElement()).getHeight());
-
-				v = reconstruct(v, w, u);     // δομική αλλαγή
-				remedyHeight(v.getLeft());    // διόρθωση υψών των
-				remedyHeight(v.getRight());   // εμπλεκόμενων κόμβων
-				remedyHeight(v);
-			}
-			v = v.getParent();                // ανεβαίνουμε στον πατέρα
-		}
-	}
-
+/**
 	private BTNode reconstruct_2(BTNode v, BTNode w, BTNode u) {
 		// Right Rotation
 		if (isLeft(w) && isLeft(u)) {
@@ -376,4 +349,5 @@ public class AvlTree extends BinarySearchTree {
 			return u;
 		}
 	}
+*/
 }

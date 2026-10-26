@@ -150,40 +150,35 @@ public class SortInt {
 	}
 
 	public static void QuickSort(int[] a, int left, int right) {
-		int N = a.length;
+		int temp = 0;
 		int i = left - 1;
 		int j = right;
 		int v = a[right]; // το στοιχείο διαχωρισμού
 		
 		System.out.print("Το αριστερό στοιχείο: "+a[left]+" left="+left);
-		System.out.println(" Το στοιχείο διαχωρισμού (δεξιό): "+a[right]+" right="+right);
+		System.out.println("Το στοιχείο διαχωρισμού (δεξιό): "+a[right]+" right="+right);
 		
-		int temp = 0;
-		while(true){
+		temp = 0;
+		while(true) {
 			// όσο το στοιχείο στην θέση i είναι μικρότερο από το v (το στοιχείο διαχωρισμού) το i προωθείται
 			// θα σταματήσει όταν ανακαλύψει στοιχείο a[i] μεγαλύτερο του v
 			// ή όταν φτάσει στην θέση right
-			int tmp = 0;
-			while( a[++i] < v ){
-				
-				tmp =1;
-				if (i == right){
+			while(a[++i] < v) {
+				if (i == right) {
 					break;
 				}
 			}
 			
 			// όσο το στοιχείο στην θέση j είναι μεγαλύτερο του v (το στοιχείο διαχωρισμού) το j μειώνεται
 			// θα σταματήσει όταν ανακαλύψει στοιχείο a[j] μικρότερο του v
-			while( v < a[--j]){
-				
-				tmp=1;
-				if (j == left){
+			while(v < a[--j]) {
+				if (j == left) {
 					break;
 				}
 			}
 			
 
-			if (i >= j){
+			if (i >= j) {
 				break;
 			}
 
@@ -197,9 +192,8 @@ public class SortInt {
 				System.out.print(a[k]+" ");
 			}
 			System.out.println(" ");
-
-
 		}
+
 		System.out.println(" Τοποθέτηση του στοιχείου διαχωρισμού: "+a[i]+" και "+a[right]+" i="+i+" right="+right);
 		System.out.println(" ");
 		temp = a[i];
@@ -280,6 +274,7 @@ public class SortInt {
 
 	public static void main(String[] args) {
 		Scanner myObj = new Scanner(System.in);  // Δημιουργία ενός Scanner object
+		int [] b = new int[12];
 
 		//int a[] = new int[12];
 		// int [] a = {63,	30,	36,	31,	12,	50,	35,	5};
@@ -290,23 +285,19 @@ public class SortInt {
 		//int [] a = {11,22,30,36,55,66,88,99,900,999};
 		//int [] a = {999,900,99,88,66,55,36,30,22,11};
 		//int [] a = {1,1,1,1,1,1,1,1,1,1};
-		int b[] = new int[12];
 
 		/*
-		Random rd=new Random();
-
-		for(int i=0;i<a.length;i++)
-			a[i]=rd.nextInt(100);
-			*/
+		Random rd = new Random();
+		for(int i = 0; i < a.length; i++)
+			a[i] = rd.nextInt(100);
+		*/
 
 		System.out.println("Array to sort\n");
-		for(int i=0;i<a.length;i++){
-			System.out.print(a[i]+" ");
+		for(int i = 0; i <a.length; i++) {
+			System.out.print(a[i] + " ");
 		}
-		
 
 		System.out.println("\n");
-
 		System.out.println("Choose Sorting Algorithm");
 		System.out.println("1. Selection sort");
 		System.out.println("2. Bubble sort");
@@ -350,9 +341,9 @@ public class SortInt {
 
 		System.out.println(" ");
 		for (int j = 0; j < a.length; ++j ){
-			System.out.print(a[j]+" ");
+			System.out.print(a[j] + " ");
 		}
-		
+		myObj.close();
 	}
 }
 

@@ -75,6 +75,8 @@ public class App {
 		SNode node2 = myList.insertFirst(12);
 		SNode node3 = myList.insertFirst(50);
 		myList.insertAfter(node2, 100);
+		myList.insertAfter(node1, 105);
+		myList.insertAfter(node3, 77);
 		myList.insertLast( 200);
 		return myList;
 	}
