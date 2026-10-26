@@ -1,10 +1,9 @@
-import Dictionaries.DictionaryNodeList;
-import Dictionaries.BinarySearchTree;
-import Dictionaries.AvlTree;
-
 import comparator.Comparator;
+import lists.DictionaryNodeList;
 import lists.SNode;
 import lists.SinglyNodeList;
+import trees.AvlTree;
+import trees.BinarySearchTree;
 import tutorial.Artist;
 import tutorial.Painter;
 import items.*;
@@ -31,7 +30,7 @@ public class App {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//// Sorting
+	//// Sorting - Binary Search
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void checkSortingFunctions() {
 		Integer [] a = {56, 78, 23, 12, 7, -100, 85, 94, 77, 23, 19, 60, 100, 1, -1};
@@ -85,171 +84,69 @@ public class App {
 	//// DictionaryLinkedList
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void checkDictionaryLinkedList() {
-		DictionaryNodeList My=new DictionaryNodeList();
-		//int[] Keys={9, 3, 0, 10, 2, 5, 1, 4, 7, 6, 8};
-		//String [] Info = new String [] {"Info-9", "Info-3", "Info-0","Info-10","Info-2","Info-5","Info-1","Info-4","Info-7","Info-6","Info-8"};
-
-		int[] Keys={45, 17, 22};
+		// 1. Δημιουργία της λίστας που θα χρησιμοποιηθεί ως δομή λεξικού
+		DictionaryNodeList My = new DictionaryNodeList();
+		int[] Keys = {45, 17, 22};
 		String [] Info = new String [] {"Info-45", "Info-17", "Info-22"};
 
-
-		for(int i=0; i<Keys.length; i++){
-			Item myItem = new Item(Keys[i], Info[i]); 
-			My.insertItem(myItem); 
+		for(int i = 0; i < Keys.length; i++) {
+			Item myItem = new Item(Keys[i], Info[i]);
+			My.insertItem(myItem);
 		}
 
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("\n\nAll records in the Dictionary");
+		// 2. Eμφανίζει όλες τις εγγραφές της δομής
+		System.out.println("\n\nEμφάνιση όλων των εγγραφών της δομής λεξικού");
 		System.out.println("---------------------");
 		My.showRecords();
 		System.out.println("---------------------\n");
 
-		// Παραδείγματα κλήσης της findNode
-
+		// 3. Παραδείγματα κλήσης της findNode
+		System.out.println("FindNode examples");
+		int[] searchKeys = {16, 17, 22, 23, 45, 50};
 		// κλήση της findNode με κλειδί 16
-		int itemKey=16;
-		SNode tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key:: "+tempItem.getKey());
+		for (int i = 0; i < searchKeys.length; i++) {
+			int itemKey = searchKeys[i];
+			SNode tmp = My.findNode(itemKey);
+			if (tmp == null) {
+				System.out.println("Η αναζήτηση του " + itemKey + " επέστρεψε null.");
+			} else {
+				Item tempItem = (Item)tmp.getElement();
+				System.out.println("Η αναζήτηση του " + itemKey + " επέστρεψε τον κόμβο " + tempItem.getKey());
+			}
 		}
-		System.out.println("---------------------");
+		System.out.println("\n");
 
-		// κλήση της findNode με κλειδί 17
-		itemKey=17;
-		tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key: "+tempItem.getKey());
+		// 4. Παραδείγματα κλήσης της findInfo - Αναζήτηση πληροφοριών με βάση το κλειδί
+		System.out.println("FindInfo examples");
+		int[] searchKeys_sec = {16, 17, 22, 23, 45, 50};
+		for (int i = 0; i < searchKeys_sec.length; i++) {
+			int itemKey = searchKeys_sec[i];
+			Item temp = (Item)My.findInfo(itemKey);
+			if (temp == null) {
+				System.out.println("Δεν υπάρχει εγγραφή με κλειδί " + itemKey);
+			} else {
+				System.out.println("Βρέθηκε εγγραφή με κλειδί: " + itemKey + " και πληροφορίες: " + temp.getInfo());
+			}
 		}
-		System.out.println("---------------------");
+		System.out.println("\n\n");
 
-		// κλήση της findNode με κλειδί 22
-		itemKey=22;
-		tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key: "+tempItem.getKey());
+		// 5. Παραδείγματα κλήσης της insertItem - Εισαγωγή νέων εγγραφών
+
+		Item [] insert_items = {new Item(41, "Info-41"), new Item(16, "Info-16"), new Item(50, "Info-50")};
+		for (int i = 0; i < insert_items.length; i++) {
+			Item newItem = insert_items[i];
+			My.insertItem(newItem);
+			System.out.println("Εισαγωγή εγγραφής με κλειδί: " + newItem.getKey() + " στο λεξικό\n");
+
+			// Εμφανίζει όλες τις εγγραφές της δομής
+			System.out.println("Όλες οι εγγραφές στο λεξικό");
+			System.out.println("---------------------");
+			My.showRecords();
+			System.out.println("---------------------\n");
 		}
-		System.out.println("---------------------");
-
-		// κλήση της findNode με κλειδί 23
-		itemKey=23;
-		tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key: "+tempItem.getKey());
-		}
-		System.out.println("---------------------");
-
-		// κλήση της findNode με κλειδί 45
-		itemKey=45;
-		tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key: "+tempItem.getKey());
-		}
-		System.out.println("---------------------");
-
-		// κλήση της findNode με κλειδί 50
-		itemKey=50;
-		tmp = My.findNode(itemKey);
-		if (tmp == null){
-			System.out.println("findNode("+itemKey+") returned null");
-		} else{
-			System.out.println("findNode("+itemKey+") returned a not null value");
-			Item tempItem = (Item)tmp.getElement();
-			System.out.println(" findNode returned node with key: "+tempItem.getKey());
-		}
-		System.out.println("---------------------\n\n");
-
-
-		// Παραδείγματα κλήσης της findInfo 
-
-		// κλήση της findIfo με κλειδί 17
-		itemKey=17;
-		Item temp = (Item)My.findInfo(itemKey);
-		if (temp == null){
-		System.out.println("findInfo("+itemKey+") returned null");
-		System.out.println("There is no node with this Key");
-		} else {
-		System.out.println(" findInfo("+itemKey+") returned a record with key: "+temp.getKey());
-		System.out.println(" and info: "+temp.getInfo());
-		}
-		System.out.println("---------------------");
-		// κλήση της findInfo με κλειδί 45
-		itemKey=45;
-		temp = (Item)My.findInfo(itemKey);
-		if (temp == null) {
-			System.out.println("findInfo("+itemKey+") returned null");
-			System.out.println("There is no node with this Key");
-		} else {
-			System.out.println(" findInfo("+itemKey+") returned a record with key: "+temp.getKey());
-			System.out.println(" and info: "+temp.getInfo());
-		}
-		System.out.println("---------------------");
-
-		// κλήση της findNode με κλειδί 50
-		itemKey=50;
-		temp = (Item)My.findInfo(itemKey);
-		if (temp == null) {
-			System.out.println("findInfo("+itemKey+") returned null");
-			System.out.println("There is no node with this Key");
-		} else {
-			System.out.println(" findInfo("+itemKey+") returned a record with key: "+temp.getKey());
-			System.out.println(" and info: "+temp.getInfo());
-		}
-		System.out.println("---------------------\n\n");
-
-
-		// κλήση της insertItem για προσθήκη εγγραφής με κλειδί 41
-		Item newItem1 = new Item(41, "Info-41");
-		My.insertItem(newItem1);
-		System.out.println("A new record with key: "+newItem1.getKey()+" inserted to the Dictionary\n");
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("All records in the Dictionary");
-		System.out.println("---------------------");
-		My.showRecords();
-		System.out.println("---------------------\n");
-
-		// κλήση της insertItem για προσθήκη εγγραφής με κλειδί 16
-		Item newItem2 = new Item(16, "Info-16");
-		My.insertItem(newItem2);
-		System.out.println("A new record with key: "+newItem2.getKey()+" inserted to the Dictionary\n");
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("All records in the Dictionary");
-		System.out.println("---------------------");
-		My.showRecords();
-		System.out.println("---------------------\n");
-
-		// κλήση της insertItem για προσθήκη εγγραφής με κλειδί 50
-		Item newItem3 = new Item(50, "Info-50");
-		My.insertItem(newItem3);
-		System.out.println("A new record with key: "+newItem3.getKey()+" inserted to the Dictionary\n");
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("All records in the Dictionary");
-		System.out.println("---------------------");
-		My.showRecords();
-		System.out.println("---------------------\n");
-
 
 		// κλήση της deleteItem για απόσβεση της εγγραφής με κλειδί 22
-		itemKey=22;
+		int itemKey=22;
 		if (My.deleteItem(itemKey)){
 		System.out.println("The record with key: "+itemKey+" deleted\n");
 		} else{
@@ -275,24 +172,6 @@ public class App {
 		System.out.println("---------------------\n");
 	}
 
-	public static void test_binary_search() {
-/*
-		Object[] A = new Object[22];
-		for (int i = 0; i < A.length; i++)
-			A[i] = A[i] + 3;
-
-		Object[] A = new Object[] {2, 4, 5, 8, 9, 13, 17, 41, 42, 48, 50, 55, 57, 59, 61, 66, 67, 72, 74, 75, 87, 88};
-
-		for(int i = 0; i < A.length; i++)
-			System.out.print(((Integer)A[i]).intValue()+" ");
-
-	    nofcomparisons=0;
-    	System.out.println("");
-		//System.out.print("\n\n Search for: "+A[8]+" Position:"+binarySearch(A, A[8], new comparator())+" nofcomparisons: "+nofcomparisons+"\n"); nofcomparisons=0;
-		System.out.println("\n\n Search for: "+"56"+" Position:"+binarySearchRecursive(A, 0,21, 57, new Comparator())); 
-*/
-	}
-
 	public static BinarySearchTree create_binary_tree() {
 		BinarySearchTree bst = new BinarySearchTree(new Comparator());
 		bst.insertItem(new Item(10, "payload for key 10"));
@@ -314,9 +193,9 @@ public class App {
 		avl.insertItem(new AvlItem(15, "payload for key 15"));
 		avl.insertItem(new AvlItem(7, "payload for key 7"));
 		avl.insertItem(new AvlItem(9, "payload for key 9"));
-		avl.insertItem(new AvlItem(2, "payload for key 9"));
-		avl.insertItem(new AvlItem(3, "payload for key 9"));
-		avl.insertItem(new AvlItem(4, "payload for key 9"));
+		avl.insertItem(new AvlItem(2, "payload for key 2"));
+		avl.insertItem(new AvlItem(3, "payload for key 3"));
+		avl.insertItem(new AvlItem(4, "payload for key 4"));
 		return avl;
 	}
 
@@ -328,10 +207,9 @@ public class App {
 		//checkSortingFunctions();
 
 		// Linked Lists
-		//checkLinkedLists();
-		// checkDictionaryLinkedList();
-		//SinglyNodeList lst = createLinkedList();
-		//lst.display();
+		// checkLinkedLists();
+		checkDictionaryLinkedList();
+/*
 		// BinarySearchTree tree = create_binary_tree();
 		AvlTree tree = create_avl_tree();
 
@@ -346,5 +224,6 @@ public class App {
 		System.out.println();
 		System.out.print("In-Order Traversal: ");
 		tree.InOrder();
+*/
     }
 }

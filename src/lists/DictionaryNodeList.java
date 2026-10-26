@@ -1,7 +1,5 @@
-package Dictionaries;
+package lists;
 
-import lists.SNode;
-import lists.SinglyNodeList;
 import items.Item;
 
 public class DictionaryNodeList extends SinglyNodeList {
@@ -13,8 +11,8 @@ public class DictionaryNodeList extends SinglyNodeList {
 	*/
 	public SNode findNode(Object itemKey) {
 		SNode cursor = first();
-		SNode precursor = null; // βοηθητικοί δείκτες, ο precursor είναι πάντοτε έναν κόμβο πριν τον cursor
-		while (cursor != null) { // όσο δεν φθάσαμε στην ουρά…
+		SNode precursor = null;		// βοηθητικοί δείκτες, ο precursor είναι πάντοτε έναν κόμβο πριν τον cursor
+		while (cursor != null) {	// όσο δεν φθάσαμε στην ουρά
 			Item tmp = (Item)cursor.getElement();
 			if ((int)tmp.getKey() >= (int)itemKey) {
 				break;
@@ -74,9 +72,9 @@ public class DictionaryNodeList extends SinglyNodeList {
 		Item checkItem;
 
 		if (found == null) {
-			checkItem = (Item)first().getElement(); // κεφαλή
+			checkItem = (Item)first().getElement();			// κεφαλή
 		} else if (found == tail) {
-			checkItem = (Item) found.getElement(); // ουρά
+			checkItem = (Item) found.getElement();			// ουρά
 		} else {
 			checkItem = (Item)found.getNext().getElement(); // επόμενος κόμβος
 		}
@@ -109,4 +107,4 @@ public class DictionaryNodeList extends SinglyNodeList {
 		}
 		System.out.println("");
 	}
-}; // Τέλος DictionaryNodeList
+};

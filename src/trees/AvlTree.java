@@ -1,6 +1,5 @@
-package Dictionaries;
+package trees;
 
-import trees.BTNode;
 import items.AvlItem;
 import items.Item;
 import comparator.Comparator;

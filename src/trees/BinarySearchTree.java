@@ -1,7 +1,5 @@
-package Dictionaries;
+package trees;
 
-import trees.LinkedBinaryTree;
-import trees.BTNode;
 import items.Item;
 import comparator.Comparator;
 
