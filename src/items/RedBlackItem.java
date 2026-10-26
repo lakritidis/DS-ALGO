@@ -3,7 +3,7 @@ package items;
 public class RedBlackItem extends Item {
 	private boolean color;
 
-	protected RedBlackItem(Object k, Object i, boolean c) {
+	public RedBlackItem(Object k, Object i, boolean c) {
 		super(k, i);
 		color = c;
 	}

@@ -1,11 +1,16 @@
 import comparator.Comparator;
+
 import lists.DictionaryNodeList;
 import lists.SNode;
 import lists.SinglyNodeList;
+
 import trees.AvlTree;
 import trees.BinarySearchTree;
+import trees.RedBlackTree;
+
 import tutorial.Artist;
 import tutorial.Painter;
+
 import items.*;
 
 public class App {
@@ -106,12 +111,15 @@ public class App {
 		// κλήση της findNode με κλειδί 16
 		for (int i = 0; i < searchKeys.length; i++) {
 			int itemKey = searchKeys[i];
+			System.out.print("Αναζήτηση κόμβου με κλειδί " + itemKey + "...");
+
 			SNode tmp = My.findNode(itemKey);
+
 			if (tmp == null) {
-				System.out.println("Η αναζήτηση του " + itemKey + " επέστρεψε null.");
+				System.out.println("Πιθανός προηγούμενος κόμβος του " + itemKey + ": null.");
 			} else {
 				Item tempItem = (Item)tmp.getElement();
-				System.out.println("Η αναζήτηση του " + itemKey + " επέστρεψε τον κόμβο " + tempItem.getKey());
+				System.out.println("Πιθανός προηγούμενος κόμβος του " + itemKey + ": Κόμβος με κλειδί " + tempItem.getKey());
 			}
 		}
 		System.out.println("\n");
@@ -121,55 +129,49 @@ public class App {
 		int[] searchKeys_sec = {16, 17, 22, 23, 45, 50};
 		for (int i = 0; i < searchKeys_sec.length; i++) {
 			int itemKey = searchKeys_sec[i];
+			System.out.print("Αναζήτηση εγγραφής με κλειδί " + itemKey + "...");
+
 			Item temp = (Item)My.findInfo(itemKey);
+
 			if (temp == null) {
 				System.out.println("Δεν υπάρχει εγγραφή με κλειδί " + itemKey);
 			} else {
 				System.out.println("Βρέθηκε εγγραφή με κλειδί: " + itemKey + " και πληροφορίες: " + temp.getInfo());
 			}
 		}
-		System.out.println("\n\n");
+		System.out.println("\n");
 
 		// 5. Παραδείγματα κλήσης της insertItem - Εισαγωγή νέων εγγραφών
-
+		System.out.println("InsertItem examples");
 		Item [] insert_items = {new Item(41, "Info-41"), new Item(16, "Info-16"), new Item(50, "Info-50")};
 		for (int i = 0; i < insert_items.length; i++) {
 			Item newItem = insert_items[i];
+			System.out.print("Εισαγωγή εγγραφής με κλειδί " + newItem.getKey() + " στο λεξικό... ");
+
 			My.insertItem(newItem);
-			System.out.println("Εισαγωγή εγγραφής με κλειδί: " + newItem.getKey() + " στο λεξικό\n");
 
 			// Εμφανίζει όλες τις εγγραφές της δομής
 			System.out.println("Όλες οι εγγραφές στο λεξικό");
-			System.out.println("---------------------");
 			My.showRecords();
-			System.out.println("---------------------\n");
 		}
+		System.out.println("\n");
 
-		// κλήση της deleteItem για απόσβεση της εγγραφής με κλειδί 22
-		int itemKey=22;
-		if (My.deleteItem(itemKey)){
-		System.out.println("The record with key: "+itemKey+" deleted\n");
-		} else{
-		System.out.println("An error occured trying to delete record with key "+itemKey+"\n");
-		}
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("All records in the Dictionary");
-		System.out.println("---------------------");
-		My.showRecords();
-		System.out.println("---------------------\n");
+		// 6. Παραδείγματα κλήσης της deleteItem - Διαγραφή εγγραφών
+		System.out.println("DeleteItem examples");
+		int [] deleteKeys = {22, 20 };
+		for (int i = 0; i < deleteKeys.length; i++) {
+			int itemKey = deleteKeys[i];
+			System.out.print("Διαγραφή εγγραφής με κλειδί " + itemKey + " από το λεξικό... ");
 
-		// κλήση της deleteItem για απόσβεση της εγγραφής με κλειδί 20
-		itemKey=20;
-		if (My.deleteItem(itemKey)){
-		System.out.println("The record with key: "+itemKey+" deleted\n");
-		} else{
-		System.out.println("An error occured trying to delete record with key "+itemKey+"\n");
+			if (My.deleteItem(itemKey)) {
+				System.out.println("Η εγγραφή με κλειδί " + itemKey + " διαγράφηκε");
+			} else {
+				System.out.println("Παρουσιάστηκε σφάλμα κατά την προσπάθεια διαγραφής της εγγραφής με κλειδί " + itemKey);
+			}
+			// Εμφανίζει όλες τις εγγραφές της δομής
+			System.out.println("Όλες οι εγγραφές στο λεξικό");
+			My.showRecords();
 		}
-		// εμφανίζει όλες τις εγγραφές της δομής
-		System.out.println("All records in the Dictionary");
-		System.out.println("---------------------");
-		My.showRecords();
-		System.out.println("---------------------\n");
 	}
 
 	public static BinarySearchTree create_binary_tree() {
@@ -199,6 +201,21 @@ public class App {
 		return avl;
 	}
 
+	public static RedBlackTree create_red_black_tree() {
+		RedBlackTree rbt = new RedBlackTree(new Comparator());
+		rbt.insertItem(new RedBlackItem(10, "payload for key 10", false));
+		rbt.insertItem(new RedBlackItem(5, "payload for key 5", false));
+		rbt.insertItem(new RedBlackItem(1, "payload for key 1", false));
+		rbt.insertItem(new RedBlackItem(18, "payload for key 18", false));
+		rbt.insertItem(new RedBlackItem(15, "payload for key 15", false));
+		rbt.insertItem(new RedBlackItem(7, "payload for key 7", false));
+		rbt.insertItem(new RedBlackItem(9, "payload for key 9", false));
+		rbt.insertItem(new RedBlackItem(2, "payload for key 2", false));
+		rbt.insertItem(new RedBlackItem(3, "payload for key 3", false));
+		rbt.insertItem(new RedBlackItem(4, "payload for key 4", false));
+		return rbt;
+	}
+
     public static void main(String[] args) throws Exception {
 		// java Tutorial
 		// JavaTutorial();
@@ -208,10 +225,11 @@ public class App {
 
 		// Linked Lists
 		// checkLinkedLists();
-		checkDictionaryLinkedList();
-/*
+		// checkDictionaryLinkedList();
+
 		// BinarySearchTree tree = create_binary_tree();
-		AvlTree tree = create_avl_tree();
+		// AvlTree tree = create_avl_tree();
+		RedBlackTree tree = create_red_black_tree();
 
 		System.out.println();
 		System.out.print("Pre-Order Traversal: ");
@@ -224,6 +242,5 @@ public class App {
 		System.out.println();
 		System.out.print("In-Order Traversal: ");
 		tree.InOrder();
-*/
     }
 }
