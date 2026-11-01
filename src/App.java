@@ -203,16 +203,16 @@ public class App {
 
 	public static RedBlackTree create_red_black_tree() {
 		RedBlackTree rbt = new RedBlackTree(new Comparator());
-		rbt.insertItem(new RedBlackItem(10, "payload for key 10", false));
-		rbt.insertItem(new RedBlackItem(5, "payload for key 5", false));
-		rbt.insertItem(new RedBlackItem(1, "payload for key 1", false));
-		rbt.insertItem(new RedBlackItem(18, "payload for key 18", false));
-		rbt.insertItem(new RedBlackItem(15, "payload for key 15", false));
-		rbt.insertItem(new RedBlackItem(7, "payload for key 7", false));
+		rbt.insertItem(new RedBlackItem(6, "payload for key 6", false));
 		rbt.insertItem(new RedBlackItem(9, "payload for key 9", false));
-		rbt.insertItem(new RedBlackItem(2, "payload for key 2", false));
-		rbt.insertItem(new RedBlackItem(3, "payload for key 3", false));
-		rbt.insertItem(new RedBlackItem(4, "payload for key 4", false));
+		rbt.insertItem(new RedBlackItem(14, "payload for key 1", false));
+		rbt.insertItem(new RedBlackItem(17, "payload for key 17", false));
+		rbt.insertItem(new RedBlackItem(5, "payload for key 5", false));
+		rbt.insertItem(new RedBlackItem(7, "payload for key 7", false));
+		rbt.insertItem(new RedBlackItem(16, "payload for key 16", false));
+		rbt.insertItem(new RedBlackItem(20, "payload for key 20", false));
+		rbt.insertItem(new RedBlackItem(18, "payload for key 18", false));
+		rbt.insertItem(new RedBlackItem(19, "payload for key 19", false));
 		return rbt;
 	}
 

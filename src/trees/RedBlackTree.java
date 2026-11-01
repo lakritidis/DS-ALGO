@@ -40,7 +40,7 @@ public class RedBlackTree extends BinarySearchTree {
 		}
 		((RedBlackItem)v.getElement()).setColor(red);
 		return true;
-	}	
+	}
 
 	// Επιστρέφει true αν ο κόμβος v είναι μαύρος, false διαφορετικά
 	private boolean isBlack(BTNode v){
