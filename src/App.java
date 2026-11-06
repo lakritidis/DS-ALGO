@@ -180,38 +180,82 @@ public class App {
 		}
 	}
 
-	public static BinarySearchTree create_binary_tree() {
+	public static void traversals_example(BinarySearchTree tree) {
+		System.out.println();
+		System.out.print("Pre-Order Traversal: ");
+		tree.PreOrder();
+
+		System.out.println();
+		System.out.print("Post-Order Traversal: ");
+		tree.PostOrder();
+
+		System.out.println();
+		System.out.print("In-Order Traversal: ");
+		tree.InOrder();
+	}
+
+	// Binary Search Tree example
+	public static BinarySearchTree BSTree_example(boolean exec_deletions) {
 		BinarySearchTree bst = new BinarySearchTree(new Comparator());
-		bst.insertItem(new Item(10, "payload for key 10"));
-		bst.insertItem(new Item(5, "payload for key 5"));
-		bst.insertItem(new Item(1, "payload for key 1"));
-		bst.insertItem(new Item(18, "payload for key 18"));
-		bst.insertItem(new Item(15, "payload for key 15"));
-		bst.insertItem(new Item(7, "payload for key 7"));
+		bst.insertItem(new Item(6, "payload for key 6"));
 		bst.insertItem(new Item(9, "payload for key 9"));
+		bst.insertItem(new Item(14, "payload for key 14"));
+		bst.insertItem(new Item(17, "payload for key 17"));
+		bst.insertItem(new Item(5, "payload for key 5"));
+		bst.insertItem(new Item(7, "payload for key 7"));
+		bst.insertItem(new Item(16, "payload for key 16"));
+		bst.insertItem(new Item(20, "payload for key 20"));
+		bst.insertItem(new Item(18, "payload for key 18"));
+		bst.insertItem(new Item(19, "payload for key 19"));
+		bst.insertItem(new Item(4, "payload for key 4"));
+		bst.insertItem(new Item(11, "payload for key 11"));
+
+		if (exec_deletions) {
+			bst.deleteItem(6);
+			bst.deleteItem(9);
+			bst.deleteItem(14);
+			bst.deleteItem(4);
+			bst.deleteItem(5);
+			bst.deleteItem(20);
+		}
+		traversals_example(bst);
 		return bst;
 	}
 
-	public static AvlTree create_avl_tree() {
+	// AVL Tree example
+	public static AvlTree AvlTree_example(boolean exec_deletions) {
 		AvlTree avl = new AvlTree(new Comparator());
-		avl.insertItem(new AvlItem(10, "payload for key 10"));
-		avl.insertItem(new AvlItem(5, "payload for key 5"));
-		avl.insertItem(new AvlItem(1, "payload for key 1"));
-		avl.insertItem(new AvlItem(18, "payload for key 18"));
-		avl.insertItem(new AvlItem(15, "payload for key 15"));
-		avl.insertItem(new AvlItem(7, "payload for key 7"));
+		avl.insertItem(new AvlItem(6, "payload for key 6"));
 		avl.insertItem(new AvlItem(9, "payload for key 9"));
-		avl.insertItem(new AvlItem(2, "payload for key 2"));
-		avl.insertItem(new AvlItem(3, "payload for key 3"));
+		avl.insertItem(new AvlItem(14, "payload for key 14"));
+		avl.insertItem(new AvlItem(17, "payload for key 17"));
+		avl.insertItem(new AvlItem(5, "payload for key 5"));
+		avl.insertItem(new AvlItem(7, "payload for key 7"));
+		avl.insertItem(new AvlItem(16, "payload for key 16"));
+		avl.insertItem(new AvlItem(20, "payload for key 20"));
+		avl.insertItem(new AvlItem(18, "payload for key 18"));
+		avl.insertItem(new AvlItem(19, "payload for key 19"));
 		avl.insertItem(new AvlItem(4, "payload for key 4"));
+		avl.insertItem(new AvlItem(11, "payload for key 11"));
+
+		if (exec_deletions) {
+			avl.deleteItem(6);
+			avl.deleteItem(9);
+			avl.deleteItem(14);
+			avl.deleteItem(4);
+			avl.deleteItem(5);
+			avl.deleteItem(20);
+		}
+		traversals_example(avl);
 		return avl;
 	}
 
-	public static RedBlackTree create_red_black_tree() {
+	// Red-Black Tree example
+	public static RedBlackTree RedBlackTree_example(boolean exec_deletions) {
 		RedBlackTree rbt = new RedBlackTree(new Comparator());
 		rbt.insertItem(new RedBlackItem(6, "payload for key 6", false));
 		rbt.insertItem(new RedBlackItem(9, "payload for key 9", false));
-		rbt.insertItem(new RedBlackItem(14, "payload for key 1", false));
+		rbt.insertItem(new RedBlackItem(14, "payload for key 14", false));
 		rbt.insertItem(new RedBlackItem(17, "payload for key 17", false));
 		rbt.insertItem(new RedBlackItem(5, "payload for key 5", false));
 		rbt.insertItem(new RedBlackItem(7, "payload for key 7", false));
@@ -219,14 +263,28 @@ public class App {
 		rbt.insertItem(new RedBlackItem(20, "payload for key 20", false));
 		rbt.insertItem(new RedBlackItem(18, "payload for key 18", false));
 		rbt.insertItem(new RedBlackItem(19, "payload for key 19", false));
+		rbt.insertItem(new RedBlackItem(4, "payload for key 4", false));
+		rbt.insertItem(new RedBlackItem(11, "payload for key 11", false));
+
+		if (exec_deletions) {
+			rbt.deleteItem(6);
+			rbt.deleteItem(9);
+			rbt.deleteItem(14);
+			rbt.deleteItem(4);
+			rbt.deleteItem(5);
+			rbt.deleteItem(20);
+		}
+		traversals_example(rbt);
 		return rbt;
 	}
 
-	public static abTree create_ab_tree() {
+	// a-b Tree example
+	public static void abTree_example(boolean exec_deletions) {
 		abTree abt = new abTree(2, 4, new Comparator());
+
 		abt.insertItem(new Item(6, "payload for key 6"));
 		abt.insertItem(new Item(9, "payload for key 9"));
-		abt.insertItem(new Item(14, "payload for key 1"));
+		abt.insertItem(new Item(14, "payload for key 14"));
 		abt.insertItem(new Item(17, "payload for key 17"));
 		abt.insertItem(new Item(5, "payload for key 5"));
 		abt.insertItem(new Item(7, "payload for key 7"));
@@ -234,7 +292,19 @@ public class App {
 		abt.insertItem(new Item(20, "payload for key 20"));
 		abt.insertItem(new Item(18, "payload for key 18"));
 		abt.insertItem(new Item(19, "payload for key 19"));
-		return abt;
+		abt.insertItem(new Item(4, "payload for key 4"));
+		abt.insertItem(new Item(11, "payload for key 11"));
+
+		if (exec_deletions) {
+			abt.deleteItem(6);
+			abt.deleteItem(9);
+			abt.deleteItem(14);
+			abt.deleteItem(4);
+			abt.deleteItem(5);
+			abt.deleteItem(20);
+			abt.deleteItem(17);
+		}
+		abt.showTree((abTNode)abt.root(), 0);
 	}
 
     public static void main(String[] args) throws Exception {
@@ -248,24 +318,12 @@ public class App {
 		// checkLinkedLists();
 		// checkDictionaryLinkedList();
 
-		// BinarySearchTree tree = create_binary_tree();
-		// AvlTree tree = create_avl_tree();
-		// RedBlackTree tree = create_red_black_tree();
-/*
-		System.out.println();
-		System.out.print("Pre-Order Traversal: ");
-		tree.PreOrder();
+		BSTree_example(true);
+		// AvlTree_example(true);
+		// RedBlackTree_example(true);
 
-		System.out.println();
-		System.out.print("Post-Order Traversal: ");
-		tree.PostOrder();
+		// abTree_example(false);
 
-		System.out.println();
-		System.out.print("In-Order Traversal: ");
-		tree.InOrder();
-*/
-		abTree tree = create_ab_tree();
-		tree.showTree((abTNode)tree.root(), 0);
 		System.out.print("OK");
     }
 }

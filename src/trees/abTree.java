@@ -63,22 +63,41 @@ public class abTree extends LinkedGeneralTree{
 		return true;
 	}
 
+	// Διαγράφει το item του δένδρου με κλειδί key (εφόσον υπάρχει τέτοιο).
+	// Χρόνος Ο(ύψους) στη χειρότερη περίπτωση.
 	public boolean deleteItem(Object key) {
-		if (size() == 0) {
+		//  Κενό δένδρο
+		if (size() == 0) { 
 			return false;
 		}
 		int itemPos;
 
 		abTNode delNode = findNode(key, (abTNode)root()), v = delNode;
-		if ((itemPos=((abTNode)delNode).keyExists(key,c))<0) return false;
-		delNode=((abTNode)delNode.getSon(0)!=null?(abTNode)delNode.getSon(itemPos):delNode);
-		while (delNode.getSon(0)!=null )
-			delNode=(abTNode)delNode.getSon(delNode.getCurnofSons()-1);
-		if (v!=delNode) v.setItem(itemPos, delNode.deleteItem(delNode.getCurnofSons()-2));
-		else v.deleteItem(itemPos);
+		if ((itemPos = ((abTNode)delNode).keyExists(key,c)) < 0) {
+			return false;
+		}
+		delNode = (abTNode)delNode.getSon(0) != null ? (abTNode)delNode.getSon(itemPos) : delNode;
 
-		if (!delNode.underflow(a)) return true;
-		else balanceUnderflow(delNode);
+		// Εντοπισμός του δεξιότερου στοιχείου του αριστερού υποδένδρου
+		while (delNode.getSon(0) != null) {
+			delNode = (abTNode)delNode.getSon(delNode.getCurnofSons() - 1);
+		}
+
+		//  Ανταλλαγή με το δεξιότερο στοιχείο του αριστερού υποδένδρου
+		if (v != delNode) {
+			v.setItem(itemPos, delNode.deleteItem(delNode.getCurnofSons() - 2));
+		} else {
+			v.deleteItem(itemPos);
+		}
+
+		// Διαγραφή χωρίς να δημιουργείται έλλειμμα
+		if (!delNode.underflow(a)) {
+			return true;
+		// Διαγραφή με έλλειμμα: Επαναζύγιση του δένδρου
+		} else {
+			balanceUnderflow(delNode);
+		}
+
 		return true;	
 	}
 
@@ -103,11 +122,11 @@ public class abTree extends LinkedGeneralTree{
 			v.setItem((b + 1) / 2 - 1,null);
 			v.decCurnofSons();
 
-			setRoot(new abTNode(new Item[b], null, b+1));
+			setRoot(new abTNode(new Item[b], null, b + 1));
 			root().setSon(0,v);
 			v.setParent(root());
 			((abTNode) root()).setItem(0, splitItem);
-			root().setSon(1,buddy);
+			root().setSon(1, buddy);
 			buddy.setParent(root());
 			((abTNode)root()).setCurnofSons(2);
 		}
@@ -173,7 +192,7 @@ public class abTree extends LinkedGeneralTree{
 					}
 
 					if (sibling.getSon(2 * a - 2) != null) {
-						sibling.getSon(2*a-2).setParent(sibling);
+						sibling.getSon(2 * a - 2).setParent(sibling);
 					}
 					sibling.setCurnofSons(2 * a - 1);
 					if (v.getParent() != null) {
@@ -197,9 +216,11 @@ public class abTree extends LinkedGeneralTree{
 					if (sibling.getCurnofSons() > 0) {
 						v.insertSon(2 * a - 2,sibling.deleteSon(0));
 					}
-					if (v.getSon(2*a-2)!=null)v.getSon(2*a-2).setParent(v);
+					if (v.getSon(2 * a - 2) != null) {
+						v.getSon(2 * a - 2).setParent(v);
+					}
 					v.setCurnofSons(2*a-1);
-					if (sibling.getParent()!=null){
+					if (sibling.getParent() != null) {
 						sibling.getParent().deleteSon(sibling);
 						sibling.setParent(null); 
 						v = (abTNode)v.getParent();
@@ -221,27 +242,51 @@ public class abTree extends LinkedGeneralTree{
 		}
 	}
 
-	public static void showTree(abTNode v, int level){
-	if (v==null) return;
-	int m=v.getCurnofSons()/2, M=v.getCurnofSons();
-	for (int j=0;j<m;j++)
-		showTree((abTNode)v.getSon(j), level+1);
-	for (int j=0;j<level;j++)
-		System.out.print("         "); 
+	// Διαπέραση του δένδρου σε βάθος (in-order) και εμφάνιση των στοιχείων του.
+	public static void showTree(abTNode v, int level) {
+		if (v == null) {
+			return;
+		}
+
+		// Αριστερα
+		int m = v.getCurnofSons() / 2, M = v.getCurnofSons();
+		for (int j = 0; j < m; j++) {
+			showTree((abTNode)v.getSon(j), level + 1);
+		}
+
+		// Print
+		for (int j = 0; j < level; j++) {
+			System.out.print("\t"); 
+		}
+		System.out.print("L-" + level + ":");
 		v.showNode();  
-	for (int j=m;j<M;j++)
-		showTree((abTNode)v.getSon(j), level+1);
+
+		// Δεξιά
+		for (int j = m; j < M; j++) {
+			showTree((abTNode)v.getSon(j), level + 1);
+		}
 	}
 
-	public static void showTreeWithInfo(abTNode v, int level){
-	if (v==null) return;
-	int m=v.getCurnofSons()/2, M=v.getCurnofSons();
-	for (int j=0;j<m;j++)
-		showTreeWithInfo((abTNode)v.getSon(j), level+1);
-	for (int j=0;j<level;j++)
-		System.out.print("         "); 
-		v.showNodeWithInfo();  
-	for (int j=m;j<M;j++)
-		showTreeWithInfo((abTNode)v.getSon(j), level+1);
+	public static void showTreeWithInfo(abTNode v, int level) {
+		if (v == null) {
+			return;
+		}
+
+		// Αριστερα
+		int m = v.getCurnofSons() / 2, M = v.getCurnofSons();
+		for (int j = 0; j < m; j++) {
+			showTreeWithInfo((abTNode)v.getSon(j), level + 1);
+		}
+
+		// Print
+		for (int j = 0; j < level; j++) {
+			System.out.print("\t");
+		}
+		v.showNodeWithInfo();
+
+		// Δεξιά
+		for (int j = m; j < M; j++) {
+			showTreeWithInfo((abTNode)v.getSon(j), level + 1);
+		}
 	}
 }
