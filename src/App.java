@@ -7,9 +7,15 @@ import lists.SinglyNodeList;
 import trees.AvlTree;
 import trees.BinarySearchTree;
 import trees.RedBlackTree;
+import trees.abTree;
+import trees.abTNode;
+import trees.LinkedGeneralTree;
+import trees.TNode;
 
 import tutorial.Artist;
 import tutorial.Painter;
+
+
 
 import items.*;
 
@@ -216,6 +222,21 @@ public class App {
 		return rbt;
 	}
 
+	public static abTree create_ab_tree() {
+		abTree abt = new abTree(2, 4, new Comparator());
+		abt.insertItem(new Item(6, "payload for key 6"));
+		abt.insertItem(new Item(9, "payload for key 9"));
+		abt.insertItem(new Item(14, "payload for key 1"));
+		abt.insertItem(new Item(17, "payload for key 17"));
+		abt.insertItem(new Item(5, "payload for key 5"));
+		abt.insertItem(new Item(7, "payload for key 7"));
+		abt.insertItem(new Item(16, "payload for key 16"));
+		abt.insertItem(new Item(20, "payload for key 20"));
+		abt.insertItem(new Item(18, "payload for key 18"));
+		abt.insertItem(new Item(19, "payload for key 19"));
+		return abt;
+	}
+
     public static void main(String[] args) throws Exception {
 		// java Tutorial
 		// JavaTutorial();
@@ -229,8 +250,8 @@ public class App {
 
 		// BinarySearchTree tree = create_binary_tree();
 		// AvlTree tree = create_avl_tree();
-		RedBlackTree tree = create_red_black_tree();
-
+		// RedBlackTree tree = create_red_black_tree();
+/*
 		System.out.println();
 		System.out.print("Pre-Order Traversal: ");
 		tree.PreOrder();
@@ -242,5 +263,9 @@ public class App {
 		System.out.println();
 		System.out.print("In-Order Traversal: ");
 		tree.InOrder();
+*/
+		abTree tree = create_ab_tree();
+		tree.showTree((abTNode)tree.root(), 0);
+		System.out.print("OK");
     }
 }

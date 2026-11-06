@@ -6,35 +6,43 @@ import comparator.Comparator;
 public class abTNode extends TNode {
 	private int curnofSons; //current nof sons  
 
+	// Constructor
 	public abTNode(Item[] items, abTNode parent, int nofsons) {
 		super(items, parent, nofsons);
 		curnofSons = 1;
 	}
 
+	// Επιστρέφει true αν υπάρχει υπερχείλιση.
 	public boolean overflow(int b) {
-		return curnofSons == b + 1;
+		return curnofSons == (b + 1);
 	}
 
+	// Επιστρέφει true αν υπάρχει έλλειμμα.
 	public boolean underflow(int a) {
-		return curnofSons == a - 1;
+		return curnofSons == (a - 1);
 	}
 
+	// Επιστρέφει true αν υπάρχει δυνατότητα δανεισμού παιδιού.
 	public boolean canBorrow(int a) {
 		return curnofSons > a;
 	}
 
-	public int getCurnofSons(){
+	// Επιστρέφει το τρέχον πλήθος των παιδιών του κόμβου.
+	public int getCurnofSons() {
 		return curnofSons;
 	}
 
+	// Θέτει το τρέχον πλήθος παιδιών του κόμβου.
 	public void setCurnofSons(int s) {
 		curnofSons = s;
 	}
 
+	// Επιστρέφει το i-στο κλειδί του κόμβου.
 	public Object getKey(int i){
 		return ((Item[])element())[i].getKey();
 	}
 
+	 // Εύρεση της θέσης του key.
 	public int findPositionItem(Object key, Comparator c) {
 		if (curnofSons == 1) {
 			return 0;
@@ -43,14 +51,15 @@ public class abTNode extends TNode {
 		while (j < curnofSons - 1 && c.less(getKey(j), key)) {
 			j++;
 		}
-		j++;
 		return j;
 	}
 
+	// Θέτει το i-στο item.
 	protected void setItem(int i, Item item) {
 		((Item[])element())[i] = item;
 	}
 
+	// Επιστρέφει το i-στο item.
 	protected Item getItem(int i) {
 		return ((Item[])element())[i];
 	}	
@@ -63,6 +72,7 @@ public class abTNode extends TNode {
 		curnofSons = curnofSons - 1 >= 0 ? curnofSons - 1 : curnofSons;
 	}	
 
+	// Αναζήτηση στοιχείου με κλειδί key.
 	public Item findItem(Object key, Comparator c) {
 		int itemPos = findPositionItem(key, c);
 		if (itemPos < 0) {
@@ -71,6 +81,7 @@ public class abTNode extends TNode {
 		return c.equal(getKey(itemPos), key) ? getItem(itemPos) : null;
 	}
 
+	// Διαγραφή και επιστροφή του i-στου στοιχείου.
 	public Item deleteItem(int i) {
 		if (i < 0 || i > curnofSons - 1) {
 			System.out.println("Out of Bounds"); 
@@ -85,7 +96,7 @@ public class abTNode extends TNode {
 		return temp;
 	}
 
-	// Διαγραφή του στοιχείου με κλειδί key.
+	// Overloaded: Διαγραφή του στοιχείου με κλειδί key.
 	public int deleteItem(Object key, Comparator c) {
 		int itemPos = findPositionItem(key, c);
 
@@ -99,7 +110,8 @@ public class abTNode extends TNode {
 		return itemPos;
 	}
 
-	// Εισαγωγή στοιχείου item στη θέση itemPos. Επιστρέφει τη θέση εισαγωγής ή -1 εάν δεν έγινε εισαγωγή
+	// Εισαγωγή στοιχείου item στη θέση itemPos.
+	// Επιστρέφει τη θέση εισαγωγής ή -1 εάν δεν έγινε εισαγωγή.
 	public int insertItem(Item item, Comparator c) {
 		int itemPos = findPositionItem(item.getKey(), c);
 		if (itemPos < 0) {
@@ -115,7 +127,8 @@ public class abTNode extends TNode {
 		return itemPos;
 	}
 
-	// Ελέγχει αν υπάρχει στοιχείο με κλειδί key. Επιστρέφει τη θέση του στοιχείου ή -1 εάν δεν υπάρχει
+	// Ελέγχει αν υπάρχει στοιχείο με κλειδί key.
+	// Επιστρέφει τη θέση του στοιχείου ή -1 εάν δεν υπάρχει.
 	public int keyExists(Object key, Comparator c) {
 		int itemPos = findPositionItem(key, c);
 		if (itemPos < 0 || itemPos == curnofSons - 1) {
@@ -129,7 +142,8 @@ public class abTNode extends TNode {
 		}
 	}
 
-	// Διαχωρισμός του κόμβου σε δύο κόμβους. Επιστρέφει τον νέο κόμβο που δημιουργείται
+	// Διαχωρισμός του κόμβου σε δύο κόμβους. Διασπά τον τρέχοντα κόμβο και μεταφέρει τα μισά
+	// μεγαλύτερα στοιχεία σε νέο κόμβο. Επιστρέφει τον νέο κόμβο που δημιουργείται.
 	public abTNode split() {
 		abTNode buddy = new abTNode(new Item[nofSons - 1], (abTNode)this.getParent(), nofSons);
 		int middle = nofSons / 2;
@@ -167,7 +181,7 @@ public class abTNode extends TNode {
 
 	public void showNodeWithInfo() {
 		System.out.print("<");
-		for (int i=0; i<curnofSons-1; i++) {
+		for (int i = 0; i < curnofSons - 1; i++) {
 			System.out.print(" " + ((Item[])element())[i].getKey() + ":" + ((Item[])element())[i].getInfo());
 		}
 		System.out.println(">");  
