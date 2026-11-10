@@ -1,6 +1,9 @@
 import comparator.Comparator;
 
-import lists.DictionaryNodeList;
+import tutorial.Artist;
+import tutorial.Painter;
+
+import lists.SearchNodeList;
 import lists.SNode;
 import lists.SinglyNodeList;
 
@@ -9,12 +12,10 @@ import trees.BinarySearchTree;
 import trees.RedBlackTree;
 import trees.abTree;
 import trees.abTNode;
-import trees.LinkedGeneralTree;
-import trees.TNode;
 
-import tutorial.Artist;
-import tutorial.Painter;
-
+import hashing.hashOperator;
+import hashing.hashingWithChaining;
+import hashing.hashingWithLinearProbing;
 
 
 import items.*;
@@ -26,7 +27,7 @@ public class App {
 
 		Artist picasso2 = new Artist("Pablo","Picasso");
 		Artist picasso3 = new Artist("Pablo","Picasso", "Oct 25,1881", "Malaga", "Apr 8,1973", "Mougins");
-		Artist dali2 = new Artist("Salvador","Dali","May 11 1904", "Figueres","Jan 23 1989", "Figueres");
+		Artist dali2 = new Artist("Salvador", "Dali","May 11 1904", "Figueres","Jan 23 1989", "Figueres");
 
 		Painter elGreco = new Painter("Dominicos","Theotokopoulos","October 1, 1541","Herakleion","April 7, 1614","Toledo",115,"Mannerism");
 		elGreco.displayArtistBio();
@@ -94,9 +95,9 @@ public class App {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// DictionaryLinkedList
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public static void checkDictionaryLinkedList() {
+	public static void SearchNodeList_example() {
 		// 1. Δημιουργία της λίστας που θα χρησιμοποιηθεί ως δομή λεξικού
-		DictionaryNodeList My = new DictionaryNodeList();
+		SearchNodeList My = new SearchNodeList(new Comparator());
 		int[] Keys = {45, 17, 22};
 		String [] Info = new String [] {"Info-45", "Info-17", "Info-22"};
 
@@ -137,7 +138,7 @@ public class App {
 			int itemKey = searchKeys_sec[i];
 			System.out.print("Αναζήτηση εγγραφής με κλειδί " + itemKey + "...");
 
-			Item temp = (Item)My.findInfo(itemKey);
+			Item temp = (Item)My.findItem(itemKey);
 
 			if (temp == null) {
 				System.out.println("Δεν υπάρχει εγγραφή με κλειδί " + itemKey);
@@ -180,6 +181,7 @@ public class App {
 		}
 	}
 
+	// Binary tree traversals example
 	public static void traversals_example(BinarySearchTree tree) {
 		System.out.println();
 		System.out.print("Pre-Order Traversal: ");
@@ -307,22 +309,63 @@ public class App {
 		abt.showTree((abTNode)abt.root(), 0);
 	}
 
+	public static void hashingWithChaining_example() {
+		int tableSize = 7;
+		hashingWithChaining hashTable = new hashingWithChaining(tableSize, new hashOperator(tableSize));
+
+		hashTable.insertItem(new Item(6, "payload for key 6"));
+		hashTable.insertItem(new Item(9, "payload for key 9"));
+		hashTable.insertItem(new Item(14, "payload for key 14"));
+		hashTable.insertItem(new Item(17, "payload for key 17"));
+		hashTable.insertItem(new Item(5, "payload for key 5"));
+		hashTable.insertItem(new Item(7, "payload for key 7"));
+		hashTable.insertItem(new Item(16, "payload for key 16"));
+		hashTable.insertItem(new Item(20, "payload for key 20"));
+		hashTable.insertItem(new Item(18, "payload for key 18"));
+		hashTable.insertItem(new Item(19, "payload for key 19"));
+		hashTable.insertItem(new Item(4, "payload for key 4"));
+		hashTable.insertItem(new Item(11, "payload for key 11"));
+		hashTable.showHashTable();
+	}
+
+		public static void hashingWithLinearProbing_example() {
+		int tableSize = 13;
+		hashingWithLinearProbing hashTable =
+			new hashingWithLinearProbing(tableSize, new hashOperator(tableSize), new Comparator());
+
+		hashTable.insertItem(new Item(6, "payload for key 6"));
+		hashTable.insertItem(new Item(9, "payload for key 9"));
+		hashTable.insertItem(new Item(14, "payload for key 14"));
+		hashTable.insertItem(new Item(17, "payload for key 17"));
+		hashTable.insertItem(new Item(5, "payload for key 5"));
+		hashTable.insertItem(new Item(7, "payload for key 7"));
+		hashTable.insertItem(new Item(16, "payload for key 16"));
+		hashTable.insertItem(new Item(20, "payload for key 20"));
+		hashTable.insertItem(new Item(18, "payload for key 18"));
+		hashTable.insertItem(new Item(19, "payload for key 19"));
+		hashTable.insertItem(new Item(4, "payload for key 4"));
+		hashTable.insertItem(new Item(11, "payload for key 11"));
+		hashTable.showHashTable();
+	}
+
     public static void main(String[] args) throws Exception {
 		// java Tutorial
 		// JavaTutorial();
 
 		// Sorting
-		//checkSortingFunctions();
+		// checkSortingFunctions();
 
 		// Linked Lists
 		// checkLinkedLists();
-		// checkDictionaryLinkedList();
 
-		BSTree_example(true);
+		// SearchNodeList_example();
+		// BSTree_example(true);
 		// AvlTree_example(true);
 		// RedBlackTree_example(true);
-
 		// abTree_example(false);
+
+		hashingWithChaining_example();
+		hashingWithLinearProbing_example();
 
 		System.out.print("OK");
     }

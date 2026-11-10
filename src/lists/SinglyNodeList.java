@@ -1,5 +1,7 @@
 package lists;
 
+import items.Item;
+
 public class SinglyNodeList {
 	protected int nofElements;  // πλήθος κόμβων-στοιχείων
 	protected SNode head, tail; // δείκτες προς κορυφή και ουρά αντίστοιχα
@@ -88,7 +90,7 @@ public class SinglyNodeList {
 	}
 
 	// Συγχωνεύει την λίστα με την s
-	public void catenate(SinglyNodeList s){
+	public void catenate(SinglyNodeList s) {
 		if (s.isEmpty()) {
 			return;
 		}
@@ -163,7 +165,7 @@ public class SinglyNodeList {
 		
 		// Όσο δεν είμαστε εκτός λίστας
 		while (temp != null) {
-			System.out.print("<" + temp.getElement() + "> ");
+			System.out.print("<" + ((Item)temp.getElement()).getKey() + "> ");
 			temp = temp.getNext();
 		}
 		System.out.println("");
